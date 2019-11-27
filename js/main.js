@@ -17,15 +17,11 @@ window.onload = function() {
         ["Contact Us", "contact.html"]];
 
     var parts = window.location.pathname.split("/");
-    var page = "";
-    if (parts.pop() == "") {
+    var page = parts.pop();
+    if (page== "") {
         page = "index.html";
-    } else {
-        page = parts.pop();
-
-        if (page.split("#").length != 1) {
+    } else if (page.split("#").length != 1) {
             page = page.split("#")[0];
-        }
     }
 
     for (var i = 0; i < menuitems.length; i++) {
