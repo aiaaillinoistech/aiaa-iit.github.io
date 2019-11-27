@@ -17,7 +17,6 @@ window.onload = function() {
         ["Contact Us", "contact.html"]];
 
     var parts = window.location.pathname.split("/");
-    console.log(parts);
     var page = parts.pop();
     if (page == "") {
         page = "index.html";
