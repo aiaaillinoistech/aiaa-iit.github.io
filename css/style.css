@@ -21,6 +21,7 @@ div.header h1 {
 }
 
 .topnav {
+    width: 100%;
     background-color: #164fc9;
     overflow: hidden;
     position: relative;
@@ -45,10 +46,16 @@ div.header h1 {
     color: white
 }
 
+div.content {
+    width: 100%;
+    margin: 0;
+}
+
 div.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 50px;
     background: #1965e0;
+    color: white;
 }

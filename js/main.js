@@ -36,6 +36,13 @@ window.onload = function() {
         menu.appendChild(link);
     }
 
+    var con = document.createElement("div");
+    con.setAttribute("class", "content");
+    var temp = document.createElement("p");
+    temp.appendChild(document.createTextNode("Under Construction"));
+    con.appendChild(temp);
+    document.body.appendChild(con);
+
     var foot = document.createElement("div");
     foot.setAttribute("class", "footer");
     var fcon = document.createElement("p");
