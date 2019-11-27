@@ -23,7 +23,7 @@ window.onload = function() {
     } else {
         page = parts.pop();
 
-        if (page.split("#").length == 1) {
+        if (page.split("#").length != 1) {
             page = page.split("#")[0];
         }
     }
