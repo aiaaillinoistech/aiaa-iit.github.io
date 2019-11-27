@@ -17,11 +17,12 @@ window.onload = function() {
         ["Contact Us", "contact.html"]];
 
     var parts = window.location.pathname.split("/");
+    console.log(parts);
     var page = parts.pop();
-    if (page== "") {
+    if (page == "") {
         page = "index.html";
     } else if (page.split("#").length != 1) {
-            page = page.split("#")[0];
+        page = page.split("#")[0];
     }
 
     for (var i = 0; i < menuitems.length; i++) {
@@ -39,7 +40,7 @@ window.onload = function() {
     var con = document.createElement("div");
     con.setAttribute("class", "content");
     var temp = document.createElement("p");
-    temp.appendChild(document.createTextNode(page));
+    temp.appendChild(document.createTextNode("Under Construction"));
     con.appendChild(temp);
     document.body.appendChild(con);
 
