@@ -33,7 +33,6 @@ window.onload = function() {
         link.setAttribute("href", menuitems[i][1]);
         link.appendChild(document.createTextNode(menuitems[i][0]));
 
-        this.console.log(page);
         if (menuitems[i][1] == page) {
             link.setAttribute("class", "active");
         }
@@ -44,7 +43,7 @@ window.onload = function() {
     var con = document.createElement("div");
     con.setAttribute("class", "content");
     var temp = document.createElement("p");
-    temp.appendChild(document.createTextNode("Under Construction"));
+    temp.appendChild(document.createTextNode(page));
     con.appendChild(temp);
     document.body.appendChild(con);
 
