@@ -16,9 +16,9 @@ window.onload = function() {
         ["Rocketry", "rocketry.html"],
         ["Contact Us", "contact.html"]];
 
-    var parts = window.location.pathname.split('/');
+    var parts = window.location.pathname.split("/");
     var page = "";
-    if (parts.length == 1) {
+    if (parts.pop() == "") {
         page = "index.html";
     } else {
         page = parts.pop().split("#")[0];
