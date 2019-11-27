@@ -21,7 +21,11 @@ window.onload = function() {
     if (parts.pop() == "") {
         page = "index.html";
     } else {
-        page = parts.pop().split("#")[0];
+        page = parts.pop();
+
+        if (page.split("#").length == 1) {
+            page = page.split("#")[0];
+        }
     }
 
     for (var i = 0; i < menuitems.length; i++) {
