@@ -33,6 +33,7 @@ window.onload = function() {
         link.setAttribute("href", menuitems[i][1]);
         link.appendChild(document.createTextNode(menuitems[i][0]));
 
+        this.console.log(page);
         if (menuitems[i][1] == page) {
             link.setAttribute("class", "active");
         }
