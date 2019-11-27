@@ -26,7 +26,7 @@ window.onload = function() {
 
     for (var i = 0; i < menuitems.length; i++) {
         var link = document.createElement("a");
-        link.setAttribute("href", "../src/" + menuitems[i][1]);
+        link.setAttribute("href", menuitems[i][1]);
         link.appendChild(document.createTextNode(menuitems[i][0]));
 
         if (menuitems[i][1] == page) {
