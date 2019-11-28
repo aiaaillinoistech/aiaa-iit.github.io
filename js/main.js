@@ -1,4 +1,20 @@
+function toggleburger() {
+    var x = document.getElementById("menu");
+    var b = x.getElementsByClassName("burger")[0].children[0];
+    if (x.className === "topnav") {
+        x.className += " responsive";
+        b.className = "fa fa-times";
+    } else {
+        x.className = "topnav";
+        b.className = "fa fa-bars";
+    }
+}
+
 window.onload = function() {
+    var fa = document.createElement("script");
+    fa.setAttribute("src", "https://use.fontawesome.com/c6ece5129d.js");
+    document.head.appendChild(fa);
+
     var head = document.createElement("div");
     head.setAttribute("class", "header");
     var title = document.createElement("h1");
@@ -8,6 +24,7 @@ window.onload = function() {
     
     var menu = document.createElement("div");
     menu.setAttribute("class", "topnav");
+    menu.setAttribute("id", "menu")
     document.body.appendChild(menu);
 
     var menuitems = [["Home", "index.html"],
@@ -31,10 +48,23 @@ window.onload = function() {
 
         if (menuitems[i][1] == page) {
             link.setAttribute("class", "active");
+
+            /*var style = this.document.createElement("style");
+            style.appendChild(document.createTextNode("@media screen and (max-width: 600px) {.topnav a:not(:nth-child(" + (i + 1) + ")) {display: none;}}"))
+            document.head.appendChild(style);*/
         }
 
         menu.appendChild(link);
     }
+
+    var link = document.createElement("a");
+    link.setAttribute("class", "burger");
+    link.setAttribute("href", "javascript:void(0);");
+    link.setAttribute("onclick", "toggleburger()");
+    var burger = document.createElement("i");
+    burger.setAttribute("class", "fa fa-bars");
+    link.appendChild(burger);
+    menu.appendChild(link);
 
     var con = document.createElement("div");
     con.setAttribute("class", "content");
@@ -49,4 +79,6 @@ window.onload = function() {
     fcon.appendChild(document.createTextNode("AIAA IIT"));
     foot.appendChild(fcon);
     document.body.appendChild(foot);
+
+    fillcontent(con);
 };

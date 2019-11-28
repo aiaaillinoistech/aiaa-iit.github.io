@@ -29,6 +29,7 @@ div.header h1 {
 
 .topnav a {
     float: left;
+    display: block;
     color: white;
     text-align: center;
     padding: 12px 16px;
@@ -44,6 +45,39 @@ div.header h1 {
 .topnav a.active {
     background-color: #1a6bed;
     color: white
+}
+
+.topnav .burger {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .topnav a:not(.active) {
+        display: none;
+    }
+    .topnav a.burger {
+        float: right;
+        display: block;
+    }
+    .topnav.responsive {
+        position: relative;
+    }
+    .topnav.responsive a.burger {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .topnav a.active {
+        background-color: #164fc9;
+    }
+    .topnav.topnav.responsive a.active {
+        background-color: #1a6bed;
+    }
 }
 
 div.content {
