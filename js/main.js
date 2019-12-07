@@ -15,21 +15,20 @@ window.onload = function() {
     fa.setAttribute("src", "https://use.fontawesome.com/c6ece5129d.js");
     document.head.appendChild(fa);
 
-    var main = document.createElement("div");
-    main.setAttribute("class", "main");
-    document.body.appendChild(main);
+    var main = document.getElementsByClassName("main")[0];
+    var con = document.getElementsByClassName("content")[0];
 
     var head = document.createElement("div");
     head.setAttribute("class", "header");
     var title = document.createElement("h1");
     title.appendChild(this.document.createTextNode("AIAA @ Illinois Tech"));
     head.appendChild(title);
-    main.appendChild(head);
+    main.insertBefore(head, con);
     
     var menu = document.createElement("div");
     menu.setAttribute("class", "topnav");
     menu.setAttribute("id", "menu")
-    main.appendChild(menu);
+    main.insertBefore(menu, con);
 
     var menuitems = [["Home", "index.html"],
         ["About", "about.html"],
@@ -66,14 +65,10 @@ window.onload = function() {
     link.appendChild(burger);
     menu.appendChild(link);
 
-    var con = document.createElement("div");
-    con.setAttribute("class", "content");
     var temp = document.createElement("p");
     temp.appendChild(document.createTextNode("Under Construction"));
     con.appendChild(temp);
-    main.appendChild(con);
     
-
     var foot = document.createElement("div");
     foot.setAttribute("class", "footer");
     var fcon = document.createElement("p");

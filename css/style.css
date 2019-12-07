@@ -111,3 +111,23 @@ div.footer {
     background: #1965e0;
     color: white;
 }
+
+div.notice {
+    background: #FF6156;
+    color: #FFF;
+    margin: 10px;
+    padding: 5px;
+}
+
+div.notice i {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.75em;
+    margin-right: 5px;
+}
+
+div.notice p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+}
