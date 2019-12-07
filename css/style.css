@@ -124,7 +124,7 @@ div.notice i {
     display: inline-block;
     vertical-align: middle;
     font-size: 1.75em;
-    margin-right: 5px;
+    margin: 5px;
 }
 
 div.notice p {

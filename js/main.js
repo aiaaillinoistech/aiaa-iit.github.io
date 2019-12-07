@@ -17,13 +17,6 @@ window.onload = function() {
 
     var main = document.getElementsByClassName("main")[0];
     var con = document.getElementsByClassName("content")[0];
-
-    var head = document.createElement("div");
-    head.setAttribute("class", "header");
-    var title = document.createElement("h1");
-    title.appendChild(this.document.createTextNode("AIAA @ Illinois Tech"));
-    head.appendChild(title);
-    main.insertBefore(head, con);
     
     var menu = document.createElement("div");
     menu.setAttribute("class", "topnav");
@@ -68,13 +61,6 @@ window.onload = function() {
     var temp = document.createElement("p");
     temp.appendChild(document.createTextNode("Under Construction"));
     con.appendChild(temp);
-    
-    var foot = document.createElement("div");
-    foot.setAttribute("class", "footer");
-    var fcon = document.createElement("p");
-    fcon.appendChild(document.createTextNode("AIAA IIT"));
-    foot.appendChild(fcon);
-    main.appendChild(foot);
 
     fillcontent(con);
 };
