@@ -68,6 +68,7 @@ window.onload = function() {
 
     var con = document.createElement("div");
     con.setAttribute("class", "content");
+    con.setAttribute("data-include", "content/index-con.html");
     var temp = document.createElement("p");
     temp.appendChild(document.createTextNode("Under Construction"));
     con.appendChild(temp);

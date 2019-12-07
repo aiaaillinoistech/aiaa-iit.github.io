@@ -1,7 +1,7 @@
 function fillcontent(parent) {
     xhreq = new XMLHttpRequest();
     xhreq.onreadystatechange = function() {
-        console.log(this.readystate);
+        console.log("Ready state: " + this.readystate);
         if (this.readystate == 4) {
             if (this.status ==200) {
                 parent.innerHTML = this.responseText;
