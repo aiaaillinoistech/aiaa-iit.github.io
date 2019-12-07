@@ -1,12 +1,12 @@
 function toggleburger() {
     var x = document.getElementById("menu");
     var b = x.getElementsByClassName("burger")[0].children[0];
-    if (x.className === "topnav") {
-        x.className += " responsive";
-        b.className = "fa fa-times";
-    } else {
-        x.className = "topnav";
+    if (x.classList.contains("responsive")) {
+        x.classList.remove("responsive");
         b.className = "fa fa-bars";
+    } else {
+        x.classList.add("responsive");
+        b.className = "fa fa-times";
     }
 }
 
@@ -15,17 +15,21 @@ window.onload = function() {
     fa.setAttribute("src", "https://use.fontawesome.com/c6ece5129d.js");
     document.head.appendChild(fa);
 
+    var main = document.createElement("div");
+    main.setAttribute("class", "main");
+    document.body.appendChild(main);
+
     var head = document.createElement("div");
     head.setAttribute("class", "header");
     var title = document.createElement("h1");
     title.appendChild(this.document.createTextNode("AIAA @ Illinois Tech"));
     head.appendChild(title);
-    document.body.appendChild(head);
+    main.appendChild(head);
     
     var menu = document.createElement("div");
     menu.setAttribute("class", "topnav");
     menu.setAttribute("id", "menu")
-    document.body.appendChild(menu);
+    main.appendChild(menu);
 
     var menuitems = [["Home", "index.html"],
         ["About", "about.html"],
@@ -48,10 +52,6 @@ window.onload = function() {
 
         if (menuitems[i][1] == page) {
             link.setAttribute("class", "active");
-
-            /*var style = this.document.createElement("style");
-            style.appendChild(document.createTextNode("@media screen and (max-width: 600px) {.topnav a:not(:nth-child(" + (i + 1) + ")) {display: none;}}"))
-            document.head.appendChild(style);*/
         }
 
         menu.appendChild(link);
@@ -71,14 +71,25 @@ window.onload = function() {
     var temp = document.createElement("p");
     temp.appendChild(document.createTextNode("Under Construction"));
     con.appendChild(temp);
-    document.body.appendChild(con);
+    main.appendChild(con);
+    
 
     var foot = document.createElement("div");
     foot.setAttribute("class", "footer");
     var fcon = document.createElement("p");
     fcon.appendChild(document.createTextNode("AIAA IIT"));
     foot.appendChild(fcon);
-    document.body.appendChild(foot);
+    main.appendChild(foot);
 
     fillcontent(con);
+};
+
+window.onscroll = function() {
+    var menu = document.getElementById("menu");
+
+    if (window.pageYOffset >= 80) {
+        menu.classList.add("sticky");
+    } else {
+        menu.classList.remove("sticky");
+    }
 };

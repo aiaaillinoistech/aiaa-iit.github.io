@@ -1,5 +1,15 @@
 function fillcontent(parent) {
-    var p = document.createElement("P");
-    p.appendChild(document.createTextNode("Test"));
-    parent.appendChild(p);
+    xhreq = new XMLHttpRequest();
+    xhreq.onreadystatechange = function() {
+        if (this.readystate == 4) {
+            if (this.status ==200) {
+                parent.innerHTML = this.responseText;
+            } else if (this.status == 404) {
+                parent.innerHTML = '<p>This page has no content!</p><br><a href="Please email mailto:aiaa@iit.edu>aiaa@iit.edu</a> so the issue may be resolved."';
+            }
+        }
+    }
+    xhreq.open("GET", "index-con.html", true);
+    xhreq.send();
+    return;
 };
