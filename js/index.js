@@ -1,3 +1,3 @@
 function fillcontent(parent) {
-    
+    GetNews();
 };

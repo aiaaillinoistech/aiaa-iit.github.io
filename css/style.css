@@ -99,8 +99,9 @@ div.header h1 {
 }
 
 div.content {
-    width: 100%;
+    width: 100% - 10px;
     margin-bottom: 50px;
+    padding: 5px;
 }
 
 div.footer {

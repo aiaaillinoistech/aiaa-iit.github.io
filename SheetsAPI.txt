@@ -1,0 +1,3 @@
+ID:         620897867482-5tvdnrjf1u45m6vf69nfcc7mj53hpe7l.apps.googleusercontent.com
+Secret:     mkqTbEMPEAMP5T9BMvTsc6FR
+API Key:    AIzaSyD_f3ZpXbPyhlZbbQCU7hoe5ElJWiuBRYY
