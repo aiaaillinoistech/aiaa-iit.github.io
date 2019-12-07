@@ -10,7 +10,7 @@ function fillcontent(parent) {
             }
         }
     }
-    xhreq.open("GET", "index-con.html", true);
+    xhreq.open("GET", "content/index-con.html", true);
     xhreq.send();
     return;
 };
