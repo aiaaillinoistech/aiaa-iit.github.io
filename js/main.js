@@ -15,7 +15,7 @@ window.onload = function() {
     fa.setAttribute("src", "https://use.fontawesome.com/c6ece5129d.js");
     document.head.appendChild(fa);
 
-    var main = document.getElementsByClassName("main")[0];
+    var main = document.body;
     var con = document.getElementsByClassName("content")[0];
     
     var menu = document.createElement("div");
