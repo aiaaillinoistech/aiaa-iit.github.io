@@ -1,11 +1,11 @@
 function toggleburger() {
-    var x = document.getElementById("menu");
-    var b = x.getElementsByClassName("burger")[0].children[0];
-    if (x.classList.contains("responsive")) {
-        x.classList.remove("responsive");
+    var menu = document.getElementById("menu");
+    var b = menu.getElementsByClassName("burger")[0].children[0];
+    if (menu.classList.contains("responsive")) {
+        menu.classList.remove("responsive");
         b.className = "fa fa-bars";
     } else {
-        x.classList.add("responsive");
+        menu.classList.add("responsive");
         b.className = "fa fa-times";
     }
 }
@@ -23,11 +23,11 @@ window.onload = function() {
     menu.setAttribute("id", "menu")
     main.insertBefore(menu, con);
 
-    var menuitems = [["Home", "index.html"],
-        ["About", "about.html"],
-        ["DBF", "dbf.html"],
-        ["Rocketry", "rocketry.html"],
-        ["Contact Us", "contact.html"]];
+    var menuitems = [["Home", "index.html", "fa fa-home"],
+        ["About", "about.html", "fa fa-info"],
+        ["DBF", "dbf.html", "fa fa-plane"],
+        ["Rocketry", "rocketry.html", "fa fa-rocket"],
+        ["Contact Us", "contact.html", "fa fa-envelope"]];
 
     var parts = window.location.pathname.split("/");
     var page = parts.pop();
@@ -38,8 +38,13 @@ window.onload = function() {
     }
 
     for (var i = 0; i < menuitems.length; i++) {
+        var icon = document.createElement("i");
+        icon.className = menuitems[i][2];
+        
         var link = document.createElement("a");
         link.setAttribute("href", menuitems[i][1]);
+
+        link.appendChild(icon);
         link.appendChild(document.createTextNode(menuitems[i][0]));
 
         if (menuitems[i][1] == page) {
@@ -66,11 +71,15 @@ window.onload = function() {
 };
 
 window.onscroll = function() {
+    var head = document.getElementsByClassName("header")[0];
     var menu = document.getElementById("menu");
+    var cont = document.getElementsByClassName("content")[0];
 
-    if (window.pageYOffset >= 80) {
+    if (window.pageYOffset > head.offsetHeight) {
         menu.classList.add("sticky");
+        cont.style = "padding-top: " + (menu.offsetHeight + 10) + "px;";
     } else {
         menu.classList.remove("sticky");
+        cont.style = "padding-top: 10px;";
     }
 };

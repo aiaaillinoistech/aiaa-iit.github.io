@@ -1,0 +1,128 @@
+.news-slideshow {
+    position: relative;
+    margin: 20px 2.5% 10px 2.5%;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: table-cell;
+}
+
+.prev, .next {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 14px;
+    color: white;
+    background-color: rgba(94, 94, 94, 0.726);
+    font-weight: bold;
+    font-size: 18px;
+    transition: .6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.news-slideshow:hover .prev, .news-slideshow:hover .next {
+    display: block;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.slide-caption {
+    color: #f2f2f2;
+    background-color: rgb(56, 56, 56);
+    font-size: 15px;
+    padding: 5px;
+    position: relative;
+    width: 30%;
+    text-align: left;
+    vertical-align: top;
+    display: table-cell;
+}
+
+.news-dots {
+    text-align: center;
+    margin: 0 2.5% 15px 2.5%;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color .6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.slide-caption h3 {
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+.slide-caption p {
+    margin: 5px;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4;}
+    to {opacity: 1;}
+}
+
+@keyframes fade {
+    from {opacity: .4;}
+    to {opacity: 1;}
+}
+
+@media only screen and (max-width: 768px) {
+    .news-slideshow { margin: 20px 0 10px 0; }
+    .news-dots { margin: 0 0 15px 0; }
+    .slide {
+        display: inline-block;
+    }
+    .slide-caption {
+        display: inline-block;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        background-color: rgb(56, 56, 56);
+    }
+    .slide-caption h3 {
+        margin: 5px;
+    }
+}
