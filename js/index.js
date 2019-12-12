@@ -1,5 +1,6 @@
 function fillcontent(parent) {
     GetNews();
+    setInterval(() => { moveslide(1); }, 10000);
 };
 
 var slideIndex = 1;

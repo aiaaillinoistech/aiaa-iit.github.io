@@ -10,9 +10,6 @@
     <script async id="api" src="https://apis.google.com/js/api.js"></script>
 
     <script id="getnews">
-        var apiKey = "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE";
-        var discoveryDocs = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
-
         function GetNews() {
             gapi.load("client", initClient);
 
@@ -24,8 +21,8 @@
 
         function initClient() {
             gapi.client.init({
-                apiKey: apiKey,
-                discoveryDocs: discoveryDocs
+                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
             }).then(() => {
                 gapi.client.sheets.spreadsheets.values.get({
                     spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
@@ -59,9 +56,7 @@
             show.insertBefore(slide, document.getElementsByClassName("prev")[0]);
 
             var src = imgSrc;
-            console.log(src);
             if (typeof src == "undefined" || src == "") {
-                console.log("here");
                 src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
             }
 
