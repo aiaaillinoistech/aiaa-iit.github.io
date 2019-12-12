@@ -93,10 +93,14 @@
 .slide-caption h3 {
     margin: 5px;
     margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .slide-caption p {
     margin: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @-webkit-keyframes fade {

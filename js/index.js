@@ -1,6 +1,5 @@
 function fillcontent(parent) {
     GetNews();
-    showSlides(slideIndex);
 };
 
 var slideIndex = 1;

@@ -12,7 +12,8 @@ function toggleburger() {
 
 window.onload = function() {
     var fa = document.createElement("script");
-    fa.setAttribute("src", "https://use.fontawesome.com/c6ece5129d.js");
+    fa.setAttribute("src", "https://kit.fontawesome.com/b287813185.js");
+    fa.setAttribute("crossorigin", "anonymous");
     document.head.appendChild(fa);
 
     var main = document.body;
@@ -23,11 +24,11 @@ window.onload = function() {
     menu.setAttribute("id", "menu")
     main.insertBefore(menu, con);
 
-    var menuitems = [["Home", "index.html", "fa fa-home"],
-        ["About", "about.html", "fa fa-info"],
-        ["DBF", "dbf.html", "fa fa-plane"],
-        ["Rocketry", "rocketry.html", "fa fa-rocket"],
-        ["Contact Us", "contact.html", "fa fa-envelope"]];
+    var menuitems = [["Home", "index.html", "fas fa-home"],
+        ["About", "about.html", "fas fa-info"],
+        ["DBF", "dbf.html", "fas fa-plane"],
+        ["Rocketry", "rocketry.html", "fas fa-rocket"],
+        ["Contact Us", "contact.html", "fas fa-envelope"]];
 
     var parts = window.location.pathname.split("/");
     var page = parts.pop();
