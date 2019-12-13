@@ -57,9 +57,6 @@
             } else {
                 fillSlides(JSON.parse(news));
             }
-
-            document.getElementById("slide").remove();
-            document.getElementById("news-dot").remove();
         }
 
         function fillSlides(slides) {
@@ -73,6 +70,8 @@
 
             document.getElementsByClassName("slide")[0].remove();
             showSlides(1);
+            document.getElementById("slide").remove();
+            document.getElementById("news-dot").remove();
         }
 
         function buildSlide(header, caption, imgSrc, slideNum) {
