@@ -17,6 +17,10 @@
             s.remove();
             s = document.getElementById("api");
             s.remove();
+            s.document.getElementById("slide");
+            s.remove();
+            s.document.getElementById("news-dot");
+            s.remove();
         }
 
         function initClient() {
@@ -49,40 +53,76 @@
 
         function buildSlide(header, caption, imgSrc, slideNum) {
             var show = document.getElementsByClassName("news-slideshow")[0];
-            var slide = document.createElement("div");
-            slide.classList.add("slide");
-            slide.classList.add("fade");
-            slide.style = "display:none";
-            show.insertBefore(slide, document.getElementsByClassName("prev")[0]);
 
-            var src = imgSrc;
-            if (typeof src == "undefined" || src == "") {
-                src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
+            if ("content" in document.createElement("template")) {
+                var t = document.getElementById("slide");
+
+                var src = imgSrc;
+                if (typeof src == "undefined" || src == "") {
+                    src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
+                }
+
+                t.content.querySelector("img").src = src;
+                t.content.querySelector("h3").innerText = header;
+                t.content.querySelector("p").innerText = caption;
+
+                var c = document.importNode(t.content, true);
+                show.insertBefore(c, document.getElementsByClassName("prev")[0]);
+
+                t = document.getElementById("news-dot");
+                t.content.querySelector("span").setAttribute("onclick", "setslide(" + slideNum + ")");
+
+                c = document.importNode(t.content, true);
+                document.getElementsByClassName("news-dots")[0].appendChild(c);
+            } else {
+                var slide = document.createElement("div");
+                slide.classList.add("slide");
+                slide.classList.add("fade");
+                slide.style = "display:none";
+                show.insertBefore(slide, document.getElementsByClassName("prev")[0]);
+
+                var src = imgSrc;
+                if (typeof src == "undefined" || src == "") {
+                    src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
+                }
+
+                var img = document.createElement("img");
+                img.setAttribute("src", src);
+                slide.appendChild(img);
+
+                var capt = document.createElement("div");
+                capt.classList.add("slide-caption");
+                slide.appendChild(capt);
+
+                var head = document.createElement("h3");
+                head.appendChild(document.createTextNode(header));
+                capt.appendChild(head);
+
+                var par = document.createElement("p");
+                par.appendChild(document.createTextNode(caption));
+                capt.appendChild(par);
+
+                var dots = document.getElementsByClassName("news-dots")[0];
+                var dot = document.createElement("span");
+                dot.classList.add("dot");
+                dot.setAttribute("onclick", "setslide(" + slideNum + ")");
+                dots.append(dot);
             }
-
-            var img = document.createElement("img");
-            img.setAttribute("src", src);
-            slide.appendChild(img);
-
-            var capt = document.createElement("div");
-            capt.classList.add("slide-caption");
-            slide.appendChild(capt);
-
-            var head = document.createElement("h3");
-            head.appendChild(document.createTextNode(header));
-            capt.appendChild(head);
-
-            var par = document.createElement("p");
-            par.appendChild(document.createTextNode(caption));
-            capt.appendChild(par);
-
-            var dots = document.getElementsByClassName("news-dots")[0];
-            var dot = document.createElement("span");
-            dot.classList.add("dot");
-            dot.setAttribute("onclick", "setslide(" + slideNum + ")");
-            dots.append(dot);
         }
     </script>
+
+    <template id="slide">
+        <div class="slide fade">
+            <img src="">
+            <div class="slide-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </template>
+    <template id="news-dot">
+        <span class="dot" onlick=""></span>
+    </template>
 
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -101,35 +141,36 @@
             </div>
             
             <div class="row">
-                <div class="news-slideshow col-8 col-s-12">
-                    <div class="slide fade">
-                        <img src="img/LoadNews.jpg">
-                        <div class="slide-caption">
-                            <h3>Loading News</h3>
+                <div class="col-8 col-s-12">
+                    <div class="news-slideshow">
+                        <div class="slide fade">
+                            <img src="img/LoadNews.jpg">
+                            <div class="slide-caption">
+                                <h3>Loading News</h3>
+                            </div>
                         </div>
+                        <a class="prev" onclick="moveslide(-1)">
+                            <!--&#10094;-->
+                            <i class="fas fa-angle-left" style="vertical-align: middle; font-size: 1.25em;"></i>
+                        </a>
+                        <a class="next" onclick="moveslide(1)">
+                            <!--&#10095;-->
+                            <i class="fas fa-angle-right" style="vertical-align: middle; font-size: 1.25em;"></i>
+                        </a>
                     </div>
-                    <a class="prev" onclick="moveslide(-1)">&#10094;</a>
-                    <a class="next" onclick="moveslide(1)">&#10095;</a>
+                    <div class="news-dots">
+                    </div>
+                </div>
+                <div class="quick-info col-3 col-s-12">
+                    <h3>DBF Meeting Times</h3>
+                    <p><b>General:</b> Friday 3:00 pm</p>
+                    <p><b>Aero:</b> Wednesday 12:50 pm & 4:00 pm</p>
+                    <p><b>Propulsion:</b> Tuesday 3:00 pm</p>
+                    <p><b>Structures:</b> Wednesday 6:00 pm</p>
+                    <h3>Rocketry Meeting Times</h3>
+                    <p>Thursday 3:00 pm</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="news-dots col-8 col-s-12">
-                </div>
-            </div>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
-            Filler<br>
         </div>
         <div class="footer">
             <p style="text-align: center;">AIAA IIT</p>
