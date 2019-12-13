@@ -9,51 +9,75 @@
 
     <script async id="api" src="https://apis.google.com/js/api.js"></script>
 
+    <template id="slide">
+        <div class="slide fade">
+            <img src="">
+            <div class="slide-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </template>
+    <template id="news-dot">
+        <span class="dot" onlick=""></span>
+    </template>
+
+    <script src="js/cookie.js"></script>
     <script id="getnews">
         function GetNews() {
             gapi.load("client", initClient);
 
-            var s = document.getElementById("getnews");
-            s.remove();
-            s = document.getElementById("api");
-            s.remove();
-            s.document.getElementById("slide");
-            s.remove();
-            s.document.getElementById("news-dot");
-            s.remove();
+            document.getElementById("api").remove();
+            document.getElementById("getnews").remove();
         }
 
         function initClient() {
-            gapi.client.init({
-                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-            }).then(() => {
-                gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
-                    range: "News!A:D"
-                }).then((response) => {
-                    var result = response.result.values;
+            var news = getCookie("news");
 
-                    document.getElementsByClassName("slide")[0].remove();
+            if (news == "") {
+                gapi.client.init({
+                    apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                    discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+                }).then(() => {
+                    gapi.client.sheets.spreadsheets.values.get({
+                        spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                        range: "News!A:D"
+                    }).then((response) => {
+                        var result = response.result.values;
 
-                    var n = result.length < 5 ? result.length : 5;
+                        var d = new Date();
+                        d.setTime(d.getTime() + (60 * 1000));  // Cookie lasts for 1 min
+                        document.cookie = "news=" + JSON.stringify(result) + ";expires=" + d.toUTCString();
 
-                    for (var i = 1; i <= n; i++) {
-                        var item = result[result.length - i];
-
-                        buildSlide(item[1], item[2], item[3], i);
-                    }
-
-                    showSlides(1);
+                        fillSlides(result);
+                    });
+                }, (error) => {
+                    buildSlide("Could not load news", "", "img/LoadFail.jpg", 1);
                 });
-            }, (error) => {
-                buildSlide("Could not load news", "", "img/LoadFail.jpg", 1);
-            });
+            } else {
+                fillSlides(JSON.parse(news));
+            }
+
+            document.getElementById("slide").remove();
+            document.getElementById("news-dot").remove();
+        }
+
+        function fillSlides(slides) {
+            var n = slides.length < 5 ? slides.length : 5;
+
+            for (var i = 1; i <= n; i++) {
+                var item = slides[slides.length - i];
+
+                buildSlide(item[1], item[2], item[3], i);
+            }
+
+            document.getElementsByClassName("slide")[0].remove();
+            showSlides(1);
         }
 
         function buildSlide(header, caption, imgSrc, slideNum) {
             var show = document.getElementsByClassName("news-slideshow")[0];
-
+            
             if ("content" in document.createElement("template")) {
                 var t = document.getElementById("slide");
 
@@ -111,19 +135,6 @@
         }
     </script>
 
-    <template id="slide">
-        <div class="slide fade">
-            <img src="">
-            <div class="slide-caption">
-                <h3></h3>
-                <p></p>
-            </div>
-        </div>
-    </template>
-    <template id="news-dot">
-        <span class="dot" onlick=""></span>
-    </template>
-
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
@@ -143,7 +154,7 @@
             <div class="row">
                 <div class="col-8 col-s-12">
                     <div class="news-slideshow">
-                        <div class="slide fade">
+                        <div class="slide fade" style="display: table;">
                             <img src="img/LoadNews.jpg">
                             <div class="slide-caption">
                                 <h3>Loading News</h3>
