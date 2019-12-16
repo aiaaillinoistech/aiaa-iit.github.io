@@ -21,7 +21,7 @@ window.onload = function() {
 
     var menuitems = [["Home", "index.html", "fas fa-home"],
         ["About", "about.html", "fas fa-info"],
-        ["DBF", "dbf.html", "fas fa-plane"],
+        ["DBF", "dbf.html", "fas fa-plane", ["DAT to CSV", 'dat2csv.html']],
         ["Rocketry", "rocketry.html", "fas fa-rocket"],
         ["Contact Us", "contact.html", "fas fa-envelope"]];
 
@@ -36,18 +36,38 @@ window.onload = function() {
     var set = false;
 
     for (var i = 0; i < menuitems.length; i++) {
+        var item = menuitems[i];
         var icon = document.createElement("i");
-        icon.className = menuitems[i][2];
+        icon.className = item[2];
         
         var link = document.createElement("a");
-        link.setAttribute("href", menuitems[i][1]);
+        link.setAttribute("href", item[1]);
 
         link.appendChild(icon);
-        link.appendChild(document.createTextNode(menuitems[i][0]));
+        link.appendChild(document.createTextNode(item[0]));
 
-        if (menuitems[i][1] == page) {
+        if (item[1] == page) {
             link.classList.add("active");
             set = true;
+        }
+
+        if (item.length == 4) {
+            var sub = item[3];
+
+            var drop = document.createElement("div");
+            drop.classList.add("dropdown");
+
+            var dlink = document.createElement("a");
+            dlink.setAttribute("href", sub[1]);
+            dlink.appendChild(document.createTextNode(sub[0]));
+
+            if (sub[1] == page) {
+                dlink.classList.add("active");
+                set = true;
+            }
+
+            drop.appendChild(dlink);
+            link.appendChild(drop);
         }
 
         menu.appendChild(link);

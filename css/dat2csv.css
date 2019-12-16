@@ -5,6 +5,7 @@
 .inout {
     width: 40%;
     height: 400px;
+    text-align: center;
 }
 
 .in {
@@ -51,7 +52,7 @@
 
 .icons {
     position: absolute;
-    top: 134px;
+    top: 153px;
     font-size: 1.25em;
     background-color: rgb(240, 240, 240);
     color: rgb(83, 83, 83);
@@ -67,7 +68,8 @@
 @media only screen and (max-width: 768px) {
     .wrap {
         display: table;
-        margin: 0;
+        width: 100% - 30px;
+        margin: 0 15px;
     }
 
     .inout {
@@ -91,13 +93,19 @@
         display: inline-block;
         margin: 15px 0;
     }
+
     .opt {
         display: inline-block;
         vertical-align: middle;
     }
+    
     .radio {
         margin: 0 25px;
         padding-right: 0;
         margin-right: 0;
+    }
+
+    .icons {
+        top: 672px;
     }
 }
