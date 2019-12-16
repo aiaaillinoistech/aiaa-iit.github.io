@@ -4,7 +4,6 @@
 
 .inout {
     width: 40%;
-    height: 400px;
     text-align: center;
 }
 
@@ -18,7 +17,7 @@
 
 .inout textarea {
     width: 100%;
-    height: 400px;
+    height: 70vh;
     border: 2px solid gray;
     resize: none;
 }
@@ -75,6 +74,10 @@
     .inout {
         width: 100%;
         float: none;
+    }
+
+    .inout textarea {
+        height: 400px;
     }
     
     .in {

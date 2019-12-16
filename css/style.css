@@ -48,7 +48,7 @@ div.header h1 {
 a .dropdown {
     display: none;
     position: absolute;
-    margin: 10px 0 0 -8px;
+    margin: 12px 0 0 -8px;
     background-color: #5e6472;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,.2);
 }
@@ -95,10 +95,15 @@ a:hover .dropdown {
     .topnav a:not(.active) {
         display: none;
     }
+
+    .topnav {
+        position: relative;
+    }
     
     .topnav a.burger {
         float: right;
         display: block;
+        padding: 12px;
     }
     
     .topnav.responsive a.burger {
