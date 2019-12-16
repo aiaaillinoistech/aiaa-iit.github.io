@@ -16,6 +16,7 @@
     height: auto;
     display: table-cell;
     border-radius: 5px 0 0 5px;
+    vertical-align: top;
 }
 
 .prev, .next {

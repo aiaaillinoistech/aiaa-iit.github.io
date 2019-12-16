@@ -52,7 +52,7 @@ div.header h1 {
 }
 
 .topnav a:hover {
-    background-color: #8cafff;
+    background-color: #5e8eff;
     color: white;
 }
 
@@ -100,8 +100,7 @@ div.header h1 {
 
 div.content {
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 50px;
+    padding: 10px 0 50px 0;
 }
 
 div.footer {
@@ -111,6 +110,10 @@ div.footer {
     height: 50px;
     background: #1965e0;
     color: white;
+}
+
+div.notice-row {
+    margin: 0 15px;
 }
 
 div.notice {
@@ -172,4 +175,16 @@ div.notice p {
     .col-10 { width: 83.33%; }
     .col-11 { width: 91.66%; }
     .col-12 { width: 100%; }
+    
+    div.content {
+        padding: 10px 15px 50px 15px;
+    }
+
+    div.notice-row {
+        margin: 0;
+    }
+
+    a.extra {
+        display: none;
+    }
 }

@@ -11,11 +11,6 @@ function toggleburger() {
 }
 
 window.onload = function() {
-    var fa = document.createElement("script");
-    fa.setAttribute("src", "https://kit.fontawesome.com/b287813185.js");
-    fa.setAttribute("crossorigin", "anonymous");
-    document.head.appendChild(fa);
-
     var main = document.body;
     var con = document.getElementsByClassName("content")[0];
     
@@ -38,6 +33,8 @@ window.onload = function() {
         page = page.split("#")[0];
     }
 
+    var set = false;
+
     for (var i = 0; i < menuitems.length; i++) {
         var icon = document.createElement("i");
         icon.className = menuitems[i][2];
@@ -49,9 +46,20 @@ window.onload = function() {
         link.appendChild(document.createTextNode(menuitems[i][0]));
 
         if (menuitems[i][1] == page) {
-            link.setAttribute("class", "active");
+            link.classList.add("active");
+            set = true;
         }
 
+        menu.appendChild(link);
+    }
+
+    if (!set) {
+        var link = document.createElement("a");
+        link.setAttribute("href", page);
+        link.classList.add("active");
+        link.classList.add("extra");
+        var name = page.split('.')[0];
+        link.appendChild(document.createTextNode(name.charAt(0).toUpperCase() + name.split('.')[0].slice(1)));
         menu.appendChild(link);
     }
 
@@ -64,9 +72,7 @@ window.onload = function() {
     link.appendChild(burger);
     menu.appendChild(link);
 
-    var temp = document.createElement("p");
-    temp.appendChild(document.createTextNode("Under Construction"));
-    con.appendChild(temp);
+    document.getElementById("ics").remove();
 
     fillcontent(con);
 };

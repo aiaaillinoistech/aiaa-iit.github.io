@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+    <title>DAT to CSV</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/dat2csv.css">
+
+    <script async id="ics" crossorigin="anonymous" src="https://kit.fontawesome.com/b287813185.js"></script>
+
+    <script>
+        function fillcontent(parent){
+            var output = document.getElementById("out");
+            var icons = document.getElementsByClassName("icons")[0];
+            icons.style = output.clientHeight < output.scrollHeight ? "right: 33px;" : "right: 17px;";
+        }
+    </script>
+    <script async type="text/javascript" src="js/main.js"></script>
+
+    <script async>
+        function commas() {
+            var output = document.getElementById("out");
+            var input = document.getElementById("in").value;
+            var two = document.getElementsByName("type")[0].checked;
+
+            output.value = '';
+
+            if (input != "") {
+                input = input.split('\n');
+                for (var i = 0; i < input.length; i++) {
+                    var parts = input[i].split(/ +/);
+                    if (parts.length > 2) {
+                        parts = parts.splice(1);
+                    }
+                    var str = parts[0] + ',' + parts[1];
+                    output.value += two ? str : str + ',0';
+                    if (i != input.length - 1) {output.value += '\n';}
+                }
+            }
+
+            var icons = document.getElementsByClassName("icons")[0];
+            icons.style = output.clientHeight < output.scrollHeight ? "right: 33px;" : "right: 17px;";
+        }
+
+        function copy() {
+            var output = document.getElementById("out");
+            output.focus();
+            output.select();
+            document.execCommand("copy");
+        }
+
+        function save() {
+            var content = encodeURI("data:text/csv;charset=utf-8," + document.getElementById("out").value);
+            var link = document.createElement("a");
+            link.setAttribute("href", content);
+            link.setAttribute("download", "airfoil.csv");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>AIAA @ Illinois Tech</h1>
+    </div>
+    <div class="content" style="margin: 0 auto;">
+        <div class="wrap">
+            <div class="inout in">
+                <textarea id="in"></textarea>
+            </div>
+            <div class="inout out">
+                <textarea readonly id="out"></textarea>
+                <div class="icons">
+                    <a onclick="copy()"><i class="far fa-copy"></i></a>
+                    <a onclick="save()"><i class="far fa-save"></i></a>
+                </div>
+            </div>
+            <div class="btn">
+                <a onclick="commas()">
+                    Convert
+                </a>
+                <div class="opt">
+                    <div class="radio">
+                        <input type="radio" name="type" checked> X, Y
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="type"> X, Y, Z
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p style="text-align: center;">AIAA IIT</p>
+    </div>
+</body>
