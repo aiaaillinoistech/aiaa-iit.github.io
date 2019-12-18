@@ -30,6 +30,7 @@ div.header {
     height: 80px;
     position: relative;
     background: #1965e0;
+    overflow: hidden;
 }
 
 div.header h1 {
@@ -237,6 +238,7 @@ div.notice p {
     display: table-cell;
     vertical-align: middle;
     padding: 5px;
+    text-align: left;
 }
 
 [class*="col-"] {
