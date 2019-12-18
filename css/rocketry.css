@@ -1,0 +1,145 @@
+div.header {
+    background: url("../img/rocketry.jpg") no-repeat;
+    background-position: center 70%;
+    height: 500px;
+}
+
+div.header h1 {
+    text-align: center;
+    line-height: 500px;
+    font-size: 8em;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, .4);
+    width: 100%;
+    height: 100%;
+    margin-left: -1px;
+}
+
+@supports (-webkit-text-stroke: 3px black) {
+    div.header h1 {
+        -webkit-text-stroke: 3px black;
+        -webkit-text-fill-color: white;
+    }
+}
+
+div.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.comp-info {
+    text-align: center;
+    margin: 50px 4.165% 20px 5px;
+}
+
+.intro {
+    margin-top: 10px;
+}
+
+.intro p {
+    margin: 0 0 1em 0;
+}
+
+.comp-info img {
+    display: inline-block;
+    height: 5vw;
+    min-height: 50px;
+    max-height: 150px;
+    width: auto;
+    margin: 0 1vw;
+}
+
+.logo {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.comp-info p {
+    text-align: left;
+}
+
+.nar {
+    margin: 50px 5px 20px 4.165%;
+    height: 100%;
+}
+
+.nar img {
+    float: left;
+    max-width: 150px;
+    min-height: 50px;
+    vertical-align: middle;
+    width: 25%;
+    height: auto;
+}
+
+.nar p {
+    float: left;
+    width: 75%;
+    vertical-align: top;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.nar-info {
+    text-align: center;
+}
+
+.more {
+    display: inline-block;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    padding: 10px 15px;
+    margin: 10px 0;
+    min-width: 150px;
+}
+
+.more:hover {
+    background-color: rgb(30, 30, 30);
+    color: white;
+}
+
+.facts {
+    margin: 30px 2%;
+    background-color: rgba(124, 155, 238, .4);
+    border-radius: 15px;
+    padding: 0 15px;
+}
+
+.facts li {
+    margin: 5px 0 5px -15px;
+}
+
+.join {
+    margin: 30px 2%;
+}
+
+@media only screen and (max-width: 768px) {
+    div.header h1 {
+        font-size: 5em;
+    }
+
+    div.content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .comp-info {
+        margin: 50px 0 20px 0;
+    }
+
+    .comp-info img {
+        margin: 0 3vw;
+    }
+
+    .nar {
+        margin: 20px 0 20px 0;
+    }
+
+    .facts {
+        margin: 50px 0 20px 0;
+    }
+    
+    .join {
+        margin: 50px 0 20px 0;
+    }
+}

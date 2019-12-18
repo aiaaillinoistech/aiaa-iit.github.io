@@ -4,6 +4,8 @@ function toggleburger() {
     if (menu.classList.contains("responsive")) {
         menu.classList.remove("responsive");
         b.className = "fa fa-bars";
+
+        document.getElementsByClassName("content")[0].style = "padding-top: " + (document.getElementById("menu").offsetHeight + 10) + "px;";
     } else {
         menu.classList.add("responsive");
         b.className = "fa fa-times";
@@ -19,7 +21,7 @@ window.onload = function() {
     menu.setAttribute("id", "menu")
     main.insertBefore(menu, con);
 
-    var menuitems = [["Home", "index.html", "fas fa-home"],
+    var menuitems = [["Home", "/", "fas fa-home"],
         ["About", "about.html", "fas fa-info"],
         ["DBF", "dbf.html", "fas fa-plane", ["DAT to CSV", 'dat2csv.html']],
         ["Rocketry", "rocketry.html", "fas fa-rocket"],
@@ -28,7 +30,7 @@ window.onload = function() {
     var parts = window.location.pathname.split("/");
     var page = parts.pop();
     if (page == "") {
-        page = "index.html";
+        page = "/";
     } else if (page.split("#").length != 1) {
         page = page.split("#")[0];
     }
