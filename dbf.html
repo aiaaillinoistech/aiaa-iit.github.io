@@ -4,7 +4,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <?php $page = 'DBF' ?>
+    <?php
+        $page = "DBF";
+        $pos = array(array(-35, 0), array("0%", "0%"));
+        $width = "125%";
+        $img = "img/dbf.jpg";
+        $title = "Design, Build, Fly";
+    ?>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/dbf.css">
@@ -12,50 +18,11 @@
     <script async id="ics" crossorigin="anonymous" src="https://kit.fontawesome.com/b287813185.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
-    <script>
-        window.addEventListener('scroll', parallax);
-        window.addEventListener('resize', fixpos);
-        
-        var pos = 0;
-        var head;
-        function fillcontent(parent) {
-            if (window.innerWidth > 768) {
-                head = document.getElementById("head-img");
-                pos = Number(window.getComputedStyle(head, null).getPropertyValue("top").split('p')[0]);
-            } else {
-                head = document.getElementsByClassName("header")[0];
-                pos = Number(window.getComputedStyle(head, null).getPropertyValue("background-position-y").split('p')[0]);
-            }
-        }
-        function parallax() {
-            var h1 = document.getElementsByClassName("header")[0].getElementsByTagName("h1")[0];
-
-            if (window.innerWidth > 768) {
-                head.style.top = pos + window.pageYOffset*.2 + "px";
-            } else {
-                head.style.backgroundPosition = "0 " + (window.pageYOffset*.2) + "px";
-            }
-            h1.style.backgroundColor = "rgba(0,0,0," + (0.4 + window.pageYOffset*.001) + ")";
-        };
-
-        function fixpos() {
-            if (window.innerWidth > 768) {
-                pos = -.35 * window.innerWidth;
-                head = document.getElementById("head-img");
-                head.style.top = pos + window.pageYOffset*.2 + "px";
-            } else {
-                head = document.getElementsByClassName("header")[0];
-                head.style.backgroundPosition = "0 " + (window.pageYOffset*.2) + "px";
-            }
-        }
-    </script>
+    <?php include 'php/head-style.php' ?>
 </head>
 <html>
     <body>
-        <div class="header" style="background-position: 0 0px;">
-            <img id="head-img" src="img/dbf.jpg">
-            <h1>Design, Build, Fly</h1>
-        </div>
+        <?php include 'php/header.php' ?>
         <?php include 'php/topnav.php' ?>
         <div class="content">
             
