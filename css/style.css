@@ -25,7 +25,7 @@ a:hover {
     color: #5e8eff;
 }
 
-div.header {
+.header {
     width: 100%;
     height: 80px;
     position: relative;
@@ -33,7 +33,7 @@ div.header {
     overflow: hidden;
 }
 
-div.header h1 {
+.header h1 {
     margin: 0;
     position: absolute;
     top: 50%;
@@ -51,8 +51,17 @@ div.header h1 {
     z-index: 1000;
 }
 
-.topnav a {
+.topnav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.topnav li {
     float: left;
+}
+
+.topnav a {
     display: block;
     color: white;
     text-align: center;
@@ -61,37 +70,45 @@ div.header h1 {
     font-size: 15px;
 }
 
-a .dropdown {
+.dropdown {
     display: none;
     position: absolute;
-    margin: 12px 0 0 -8px;
-    background-color: #5e6472;
+    margin: 0;
+    background-color: #313131;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,.2);
     z-index: 1000;
 }
 
-a .dropdown a {
+.dropdown ul {
+    list-style-type: none;
+}
+
+.dropdown ul li {
+    float: none;
+    display: block;
+}
+
+.dropdown a {
     min-width: 150px;
     color: white;
     padding: 12px 16px;
     text-decoration: none;
     text-align: left;
+}
+
+.dropdown ul li a.active {
+    background-color: #5a5a5a;
+}
+
+.dropdown ul li a:hover {
+    background-color: #757575;
+}
+
+.topnav li:hover .dropdown {
     display: block;
 }
 
-a .dropdown a.active {
-    background-color: #464646;
-}
-
-a .dropdown a:hover {
-    background-color: #313131;
-}
-
-a:hover .dropdown {
-    display: block;
-}
-
-.topnav a i {
+.topnav i {
     width: 25px;
     text-align: center;
 }
@@ -130,6 +147,10 @@ a:hover .dropdown {
         top: 0;
     }
     
+    .topnav.responsive li {
+        float: none;
+    }
+
     .topnav.responsive a {
         float: none;
         display: block;
@@ -161,12 +182,12 @@ a:hover .dropdown {
     box-shadow: 0 5px 5px 2px rgba(0, 0, 0, .2);
 }
 
-div.content {
+.content {
     width: 100%;
     padding: 10px 0 280px 0;
 }
 
-div.footer {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -177,49 +198,49 @@ div.footer {
     text-align: center;
 }
 
-div.foot-wrap {
+.foot-wrap {
     margin: 0;
     height: 75px;
 }
 
-div.foot-row {
+.foot-row {
     margin: 5px 0;
 }
 
-div.foot-row a {
+.foot-row a {
     text-decoration: none;
     color:white;
 }
 
-div.foot-row a:hover {
+.foot-row a:hover {
     color: rgb(185, 185, 185);
 }
 
-div.foot-row u {
+.foot-row u {
     text-decoration: none;
     border-bottom: 1.5pt dashed;
 }
 
-div.foot-row i {
+.foot-row i {
     width: 28px;
     text-align: center;
 }
 
-div.foot-img {
+.foot-img {
     width: 100%;
     margin: 10px auto;
 }
 
-div.footer img {
+.footer img {
     height: 75px;
     width: auto;
 }
 
-div.notice-row {
+.notice-row {
     margin: 0 15px;
 }
 
-div.notice {
+.notice {
     display: table;
     background: #FF6156;
     color: #FFF;
@@ -227,14 +248,15 @@ div.notice {
     border-radius: 5px;
 }
 
-div.notice i {
+.notice i {
     display: table-cell;
     vertical-align: middle;
     font-size: 1.5em;
     padding: 5px;
+    width: 25px;
 }
 
-div.notice p {
+.notice p {
     display: table-cell;
     vertical-align: middle;
     padding: 5px;
@@ -281,11 +303,11 @@ div.notice p {
     .col-11 { width: 91.66%; }
     .col-12 { width: 100%; }
     
-    div.content {
+    .content {
         padding: 10px 30px 60px 30px;
     }
 
-    div.notice-row {
+    .notice-row {
         margin: 0;
     }
 
@@ -293,26 +315,26 @@ div.notice p {
         display: none;
     }
 
-    div.content {
+    .content {
         padding-bottom: 110px;
     }
 
-    div.footer {
+    .footer {
         text-align: left;
     }
 
-    div.foot-wrap {
+    .foot-wrap {
         width: auto;
         margin: 12.5px;
     }
 
-    div.foot-img {
+    .foot-img {
         float: right;
         width: auto;
         margin: 12.5px 2%;
     }
 
-    div.footer img {
+    .footer img {
         float: right;
         height: 75px;
         width: auto;

@@ -3,7 +3,7 @@ div.header {
     min-height: 250px;
 }
 
-.header img {
+#head-img {
     position: absolute;
     width: 100%;
     top: -17vw;
