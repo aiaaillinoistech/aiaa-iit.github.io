@@ -2,23 +2,21 @@
 <head>
     <title>Rocketry</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <?php
         $page = "Rocketry";
         $pos = array(array(-17, 0), array("center", "0%"));
-        $width = "100%";
+        $width = array("100%", "1000px");
         $img = "img/rocketry.jpg";
         $title = "Rocketry";
+        include 'php/head-style.php';
     ?>
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/rocketry.css">
 
-    <script async id="api" src="https://apis.google.com/js/api.js"></script>
-    <script async id="ics" crossorigin="anonymous" src="https://kit.fontawesome.com/b287813185.js"></script>
-
     <script id="load">
+        function fillcontent(parent) {
+            Init();
+        }
         function Init() {
             gapi.load("client", InitClient);
 
@@ -33,22 +31,22 @@
             }).then(() => {
                 gapi.client.sheets.spreadsheets.values.get({
                     spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
-                    range: "Execs!B8:C8"
+                    range: "Execs!A:C"
                 }).then((response) => {
-                    var result = response.result.values[0];
-                    par = document.getElementById("name").innerText += result[0] + " at ";
-                    var link = document.getElementById("join-mail");
-                    link.setAttribute("href", "mailto:" + result + "@hawk.iit.edu?subject=Rocketry");
-                    link.innerText = result[1] + "@hawk.iit.edu";
+                    response.result.values.forEach(el => {
+                        if (el[0] == "Rocketry Project Manager") {
+                            document.getElementById("name").innerText += el[1] + " at ";
+                            var link = document.getElementById("join-mail");
+                            link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=Rocketry");
+                            link.innerText = el[2] + "@hawk.iit.edu";
+                        }
+                    });
                 });
             }, (error) => {
                 console.log("Could not load email.\n" + error);
             });
         }
     </script>
-
-    <script type="text/javascript" src="js/main.js"></script>
-    <?php include 'php/head-style.php' ?>
 </head>
 <html>
     <body>

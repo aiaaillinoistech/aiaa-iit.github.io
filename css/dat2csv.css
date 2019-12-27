@@ -52,7 +52,8 @@
 
 .icons {
     position: absolute;
-    top: 155px;
+    top: 154px;
+    right: 31px;
     font-size: 1.25em;
     background-color: rgb(240, 240, 240);
     color: rgb(83, 83, 83);
