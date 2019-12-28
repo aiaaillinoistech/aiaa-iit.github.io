@@ -4,12 +4,14 @@ function toggleburger() {
     var con = document.getElementsByClassName("content")[0];
     if (menu.classList.contains("responsive")) {
         menu.classList.remove("responsive");
-        b.className = "fa fa-bars";
+        //b.className = "fa fa-bars";
+        b.classList.remove("open")
     } else {
         menu.classList.add("responsive");
-        b.className = "fa fa-times";
+        //b.className = "fa fa-times";
+        b.classList.add("open");
     }
-
+    
     if (menu.classList.contains("sticky")) {
         con.style = "padding-top: " + (menu.offsetHeight + 10) + "px;";
     }

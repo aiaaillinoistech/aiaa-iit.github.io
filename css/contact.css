@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400&display=swap');
+
+.info {
+    margin: 20px 3% 20px 3%;
+    line-height: 1.75em;
+}
+
+.info p {
+    display: inline;
+}
+
+.sm div {
+    text-align: center;
+    float: left;
+    width: 33.33%;
+}
+
+.sm::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.sm a {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.sm i {
+    font-size: 2em;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.sm p {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.fb {
+    color: #4267B2;
+}
+
+.in *{
+    background: #d6249f;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.in:hover * {
+    -webkit-text-fill-color: #d6249f;
+}
+
+.tw {
+    color: #1da1f2;
+}
+
+.sm a:hover {
+    color: #5e8eff;
+}
+
+#execs {
+    max-width: 1100px;
+    margin: 50px auto 10px auto;
+    overflow: hidden;
+}
+
+.exec-container {
+    border-left: solid 5px #1965e0;
+    margin: 50px 5%;
+}
+
+.exec-img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 125px;
+    border-radius: 50%;
+    border-width: 2px;
+    border-color: black;
+    margin: 5px 15px;
+    color: #1965e0;
+}
+
+.exec-desc {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.alt.exec-container {
+    text-align: right;
+    border-left: none;
+    border-right: solid 5px #1965e0;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.fade {
+    animation: fade 1.5s;
+}
+
+.pos {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
+.name {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 300;
+    margin: 5px 0 10px 0;
+    color: rgb(60, 60, 60);
+}
+
+.desc {
+    font-family: "Raleway", sans-serif;
+    margin: 15px 0 0 0;
+    display: inline;
+    line-height: 1.5em;
+    color: rgb(40, 40, 40);
+}
+
+.email {
+    font-family: "Raleway", sans-serif;
+    display: inline;
+    line-height: 1.5em;
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        padding: 10px 15px 280px 15px;
+    }
+
+    .exec-container, .alt.exec-container{
+        display: table;
+        border: none;
+        text-align: center;
+        width: 100%;
+        margin: 50px 0;
+    }
+
+    .exec-img {
+        display: table-header-group;
+        margin: 5px auto;
+    }
+
+    .exec-desc {
+        display: table-footer-group;
+    }
+}
+
+@-webkit-keyframes fade {
+    from { opacity: 0; -webkit-transform: translateY(50px); }
+    to { opacity: 1; }
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; }
+}

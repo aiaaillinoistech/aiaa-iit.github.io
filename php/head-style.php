@@ -20,9 +20,9 @@
         font-weight: 700;
         background-color: rgba(0,0,0,.4);
         width: 100vw;
-        height: 32vw;
+        //height: 32vw;
         margin-left: -1px;
-        min-height: 250px;
+        //min-height: 250px;
     }
     @supports (-webkit-text-stroke: 3px black) {
         .header h1 {
@@ -43,9 +43,10 @@
             overflow: auto;
             white-space: normal;
             font-size: 5em;
-            height: 500px;
             line-height: 1.25em;
-            padding: 100px 30px;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 240px 2%;
         }
     }
 </style>

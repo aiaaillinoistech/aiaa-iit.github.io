@@ -21,12 +21,15 @@
         
             if (count($item) === 4) {
                 echo "<div class=\"dropdown\"><ul>";
+                $count = 0;
                 foreach ($item['sub'] as $sub) {
                     /*if ($page === $sub['title']) {
                         $set = TRUE;
                     }*/
 
                     echo "<li><a" . ($page === $sub['title'] ? " class=\"active\"" : "" ) . " href=\"$sub[page]\">$sub[title]</a></li>";
+
+                    $count++;
                 }
                 echo "</ul></div>";
             }
@@ -39,5 +42,12 @@
         }
     ?>
     </ul>
-    <a class="burger" href="javascript:void(0);" onclick="toggleburger()"><i class="fa fa-bars"></i></a>
+    <a class="burger" href="javascript:void(0);" onclick="toggleburger()">
+        <span id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </a>
 </div>

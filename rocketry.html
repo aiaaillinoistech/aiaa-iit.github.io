@@ -13,17 +13,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/rocketry.css">
 
+    <script async id="api" src="https://apis.google.com/js/api.js"></script>
     <script id="load">
-        function fillcontent(parent) {
-            Init();
-        }
-        function Init() {
+        function fillcontent(parent) {   
             gapi.load("client", InitClient);
 
             document.getElementById("api").remove();
             document.getElementById("load").remove();
         }
-
         function InitClient() {
             gapi.client.init({
                 apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
@@ -51,7 +48,6 @@
 <html>
     <body>
         <?php include 'php/header.php' ?>
-        <?php include 'php/topnav.php' ?>
         <div class="content">
             <div class="row">
                 <div class="intro col-12 col-s-12">

@@ -12,13 +12,130 @@
     ?>
 
     <link rel="stylesheet" type="text/css" href="css/contact.css">
+    
+    <template id="exec-info">
+        <div class="exec-container hidden">
+            <img src="" class="exec-img">
+            <div class="exec-desc">
+                <h2 class="pos"></h2>
+                <h3 class="name"></h3>
+                <p class="desc"></p>
+                <a class="email" href=""></a>
+            </div>
+        </div>
+    </template>
+    <template id="exec-info-alt">
+        <div class="exec-container alt hidden">
+            <div class="exec-desc">
+                <h2 class="pos"></h2>
+                <h3 class="name"></h3>
+                <p class="desc"></p>
+                <a class="email" href=""></a>
+            </div>
+            <img src="" class="exec-img">
+        </div>
+    </template>
+    <script async id="api" src="https://apis.google.com/js/api.js"></script>
+    <script>
+        var hide;
+        window.addEventListener("scroll", checkPos);
+        window.addEventListener("resize", checkPos);
+        function checkPos() {
+            hide.forEach((el) => {
+                if (el.getBoundingClientRect().top - window.innerHeight <= 0) {
+                    el.classList.remove("hidden");
+                    el.classList.add("fade");
+                }
+            });
+
+            hide = document.querySelectorAll(".hidden");
+        }
+    </script>
+    <script id="load">
+        function fillcontent(parent) {   
+            gapi.load("client", InitClient);
+
+            hide = document.querySelectorAll(".hidden");
+            checkPos();
+            
+            document.getElementById("api").remove();
+            document.getElementById("load").remove();
+        }
+        function InitClient() {
+            gapi.client.init({
+                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+            }).then(() => {
+                gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                    range: "Execs!A:G"
+                }).then((response) => {
+                    var results = response.result.values;
+                    var execs = document.getElementById("execs");
+                    for (var i = 0; i < results.length; i++) {
+                        var info = results[i];
+
+                        if ("content" in document.createElement("template")) {
+                            var t = i % 2 == 0 ? document.getElementById("exec-info") : document.getElementById("exec-info-alt");
+
+                            var imgSrc = info[6] == null ? "img/blank-user.jpg" : info[6];
+                            t.content.querySelector("img").src = imgSrc;
+                            t.content.querySelector(".pos").innerText = info[0];
+                            t.content.querySelector(".name").innerText = info[1] + ", " + info[3] + " " + info[4];
+                            t.content.querySelector(".desc").innerText = info[5] + "\nEmail: ";
+                            var link = t.content.querySelector("a");
+                            link.href = "mailto:" + info[2] + "@hawk.iit.edu";
+                            link.innerText = info[2] + "@hawk.iit.edu";
+
+                            execs.appendChild(document.importNode(t.content, true));
+                        }
+                    }
+                    
+                    document.getElementById("exec-info").remove();
+                    document.getElementById("exec-info-alt").remove();
+
+                    hide = document.querySelectorAll(".hidden");
+                    checkPos();
+                });
+            }, (error) => {
+                console.log("Could not load exec members.\n" + error);
+            });
+        }
+    </script>
 </head>
 <html>
     <body>
         <?php include 'php/header.php' ?>
-        <?php include 'php/topnav.php' ?>
         <div class="content">
-            <p></p>
+            <div class="info">
+                Looking for our lab? We're located in the John T. Retalliata Engineering Center (Engineering 1) room 050. In the basement east of the atrium staircase.
+            </div>
+            <div class="info">
+                <p>Want to learn more about our organization? Have a suggestion for a project? Any other comments or suggestions? Feel free to email us at </p><a href="mailto:aiaa@iit.edu">aiaa@iit.edu</a><p> or reach out to the appropriate exec board member.</p>
+            </div>
+            <div class="info">
+                <p>Don't forget to join us on </p><a href="https://iit.campuslabs.com/engage/organization/aiaa" style="display: inline">Hawklink</a><p> and follow us on social media!</p>
+            </div>
+            <div class="sm">
+                <div>
+                    <a href="https://www.facebook.com/groups/1448849638601660" target="_blank" class="fb">
+                        <i class="fab fa-facebook-square"></i><p>Facebook</p>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.instagram.com/AIAA_IllinoisTech" target="_blank" class="in">
+                        <i class="fab fa-instagram"></i><span>Instagram</span>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://twitter.com/AIAATech" target="_blank" class="tw">
+                        <i class="fab fa-twitter-square"></i><p>Twitter</p>
+                    </a>
+                </div>
+            </div>
+            <div id="execs">
+                <h1 style="margin: 0; text-align: center; font-size: 2em">Meet the Exec Board</h1>
+            </div>
         </div>
         <?php include 'php/footer.php' ?>
     </body>
