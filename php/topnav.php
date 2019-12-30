@@ -21,15 +21,8 @@
         
             if (count($item) === 4) {
                 echo "<div class=\"dropdown\"><ul>";
-                $count = 0;
                 foreach ($item['sub'] as $sub) {
-                    /*if ($page === $sub['title']) {
-                        $set = TRUE;
-                    }*/
-
                     echo "<li><a" . ($page === $sub['title'] ? " class=\"active\"" : "" ) . " href=\"$sub[page]\">$sub[title]</a></li>";
-
-                    $count++;
                 }
                 echo "</ul></div>";
             }

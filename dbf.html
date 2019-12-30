@@ -1,23 +1,121 @@
 <!DOCTYPE html>
 <head>
-    <title>Design Build Fly</title>
+    <title>Design • Build • Fly</title>
 
     <?php
         $page = "DBF";
         $pos = array(array(-35, 0), array("0%", "0%"));
         $width = array("125%", "800px");
         $img = "img/dbf.jpg";
-        $title = "Design, Build, Fly";
+        $title = "Design • Build • Fly";
         include 'php/head-style.php';
     ?>
 
     <link rel="stylesheet" type="text/css" href="css/dbf.css">
+
+    <script async id="api" src="https://apis.google.com/js/api.js"></script>
+    <script id="load">
+        function fillcontent(parent) {   
+            gapi.load("client", InitClient);
+
+            document.getElementById("api").remove();
+            document.getElementById("load").remove();
+        }
+        function InitClient() {
+            gapi.client.init({
+                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+            }).then(() => {
+                gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                    range: "Execs!A:C"
+                }).then((response) => {
+                    response.result.values.forEach(el => {
+                        if (el[0] == "DBF Project Manager") {
+                            document.getElementById("cont").innerText += el[1] + " at ";
+                            var link = document.getElementById("email");
+                            link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=DBF");
+                            link.innerText = el[2] + "@hawk.iit.edu";
+                        }
+                    });
+                });
+            }, (error) => {
+                console.log("Could not load email.\n" + error);
+            });
+        }
+    </script>
 </head>
 <html>
     <body>
         <?php include 'php/header.php' ?>
         <div class="content">
-            
+            <div style="display:table; margin-bottom: 50px">
+                <div class="logo">
+                    <img src="img/dbflogo.png">
+                    <a href="https://www.aiaa.org/dbf" class="more">Find out more >></a>
+                </div>
+                <div class="intro">
+                    <p>
+                        Illinois Tech's Design, Build, Fly (DBF) team is student-led and dedicated to providing members with experience in aircraft design and testing. As the name might suggest, the goal of the competition is to design, build, and fly a remote-controlled aircraft under defined mission requirements.
+                    </p>
+                    <p>
+                        Students get the opportunity to not only apply classroom knowledge to a wide-scoped project, but they can also learn more advanced skills not taught in the classroom. Freshman and sophomore students get to take a break from their prerequisite classes and get a headstart of engineering courses to come. Junior and senior students get the chance to build and refine the skills necessary in the professional workplace.
+                    </p>
+                    <p>
+                        All students get the chance to learn any or all of the following:
+                    </p>
+                    <ul style="margin-right: 10%;">
+                        <li>Computation Fluid Mechanics (CFD)</li>
+                        <li>Finite Element Analysis (FEA)</li>
+                        <li>Wind tunnel testing</li>
+                        <li>Flight data analysis</li>
+                    </ul>
+                    <ul>
+                        <li>Wing design</li>
+                        <li>Flight mechanics</li>
+                        <li>Structural analysis</li>
+                        <li>Propeller analysis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contact">
+                <p id="cont" style="display:inline">For more info or to join, email </p><a id="email" href="mailto:aiaa@iit.edu?subject=DBF">aiaa@iit.edu</a>
+            </div>
+            <h1 style="text-align: center; margin-bottom: 10px; font-family: 'Lato', sans-serif;">Subteams</h1>
+            <p style="text-align: center; margin: 10px 10%;">
+                The team is split into three smaller groups with a particular focus. Students may join as many or few subteams as they like. Each subteam provides students with the opportunity to learn different aspects of aircraft design.
+            </p>
+            <div class="row" style="text-align: center; margin-top: 20px;">
+                <div class="subteam col-4 col-s-12">
+                    <div class="sub-img">
+                        <img src="img/aero.jpg">
+                    </div>
+                    <h2>Aerodynamics</h2>
+                    <p>
+                        The aerodynamics subteam is responsible for the design and analysis of lifting bodies on the aircraft. Members will learn the rationale behind airfoil selection and wing design. Following this, stability analysis is used to design the tail section of the aircraft. Finally, the team analyzes the flight characteristics of the aircraft to make refinements in the design.
+                    </p>
+                </div>
+                <div class="subteam col-4 col-s-12">
+                    <div class="sub-img">
+                        <img src="img/prop.jpg">
+                    </div>
+                    <h2>Propulsion</h2>
+                    <p>
+                        The propulsion subteam is responsible for the selection of propulsion and electrical system. Members will analyze propeller and motor combinations to determine which will produce enough thrust while consuming as littler power as possible. The subteam will also analyze flight characteristics to develop a flight stabilizer.
+                    </p>
+                </div>
+                <div class="subteam col-4 col-s-12">
+                    <div class="sub-img">
+                        <img src="img/struc.jpg">
+                    </div>
+                    <h2>Structures</h2>
+                    <p>
+                        The structures subteam is responsible for all structural and mechanical components of the aircraft. Members will design the fuselage and structural supports to withstand normal flight loads while minimizing weight. A variety of materials are compared for their structural capabilities and weight. This subteam also designs mechanisms required for missions.
+                    </p>
+                </div>
+            </div>
+            <p>Below is our calendar where you can see when and where general and subteam meetings are. Drop by at any time to join the team!</p>
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%231965e0&amp;ctz=America%2FChicago&amp;src=aWl0LmVkdV9kOWFybmVtZmlnMzQxbG80MDFzODdsMWl1b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23AA5A00&amp;showTitle=1&amp;showNav=1&amp;title=DBF%20Calendar&amp;showPrint=0&amp;showTabs=1&amp;showCalendars=0" style="border-width:0; width: 100%" height=600 frameborder="0" scrolling="no"></iframe>
         </div>
         <?php include 'php/footer.php' ?>
     </body>
