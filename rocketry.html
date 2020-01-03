@@ -13,37 +13,46 @@
 
     <link rel="stylesheet" type="text/css" href="css/rocketry.css">
 
-    <script async id="api" src="https://apis.google.com/js/api.js"></script>
-    <script id="load">
-        function fillcontent(parent) {   
-            gapi.load("client", InitClient);
+    <?php
+        $c = isset($_COOKIE["execs"]) && !empty($_COOKIE["execs"]);
+        if (!$c) {
+            echo '
+                <script async id="api" src="https://apis.google.com/js/api.js"></script>
+                <script id="load">
+                    function fillcontent(parent) {   
+                        gapi.load("client", InitClient);
 
-            document.getElementById("api").remove();
-            document.getElementById("load").remove();
+                        document.getElementById("api").remove();
+                        document.getElementById("load").remove();
+                    }
+                    function InitClient() {
+                        gapi.client.init({
+                            apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                            discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+                        }).then(() => {
+                            gapi.client.sheets.spreadsheets.values.get({
+                                spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                                range: "Execs!A:C"
+                            }).then((response) => {
+                                var d = new Date();
+                                d.setTime(d.getTime() + (5 * 60 * 1000));  // Cookie lasts for 5 min
+                                document.cookie = "execs=" + JSON.stringify(response.result.values) + ";expires=" + d.toUTCString();
+                                response.result.values.forEach(el => {
+                                    if (el[0] == "Rocketry Project Manager") {
+                                        document.getElementById("name").innerText += el[1] + " at ";
+                                        var link = document.getElementById("join-mail");
+                                        link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=Rocketry");
+                                        link.innerText = el[2] + "@hawk.iit.edu";
+                                    }
+                                });
+                            });
+                        }, (error) => {
+                            console.log("Could not load email.\n" + error);
+                        });
+                    }
+                </script>';
         }
-        function InitClient() {
-            gapi.client.init({
-                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-            }).then(() => {
-                gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
-                    range: "Execs!A:C"
-                }).then((response) => {
-                    response.result.values.forEach(el => {
-                        if (el[0] == "Rocketry Project Manager") {
-                            document.getElementById("name").innerText += el[1] + " at ";
-                            var link = document.getElementById("join-mail");
-                            link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=Rocketry");
-                            link.innerText = el[2] + "@hawk.iit.edu";
-                        }
-                    });
-                });
-            }, (error) => {
-                console.log("Could not load email.\n" + error);
-            });
-        }
-    </script>
+    ?>
 </head>
 <html>
     <body>
@@ -97,8 +106,18 @@
                     <p id="name" style="margin:0;display: inline;">
                         Want to start your rocket science journey and enjoy the summer heat of southern New Mexico?<br><br>
                         Email
-                    </p>
-                    <a id="join-mail" href="mailto:aiaa@iit.edu?subject=Rocketry">aiaa@iit.edu</a>
+                    <?php
+                        if ($c) {
+                            $execs = json_decode($_COOKIE["execs"]);
+                            foreach($execs as $e) {
+                                if ($e[0] == "Rocketry Project Manager") {
+                                    echo ' ' . $e[1] . ' at </p><a id="join-mail" href="mailto:' . $e[2] . '@hawk.iit.edu?subject=Rocketry">' . $e[2] . '@hawk.iit.edu</a>';
+                                }
+                            }
+                        } else {
+                            echo '</p><a id="join-mail" href="mailto:aiaa@iit.edu?subject=Rocketry">aiaa@iit.edu</a>';
+                        }
+                    ?>
                 </div>
             </div>
         </div>

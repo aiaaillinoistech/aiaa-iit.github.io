@@ -13,29 +13,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/contact.css">
     
-    <template id="exec-info">
-        <div class="exec-container hidden">
-            <img src="" class="exec-img">
-            <div class="exec-desc">
-                <h2 class="pos"></h2>
-                <h3 class="name"></h3>
-                <p class="desc"></p>
-                <a class="email" href=""></a>
-            </div>
-        </div>
-    </template>
-    <template id="exec-info-alt">
-        <div class="exec-container alt hidden">
-            <div class="exec-desc">
-                <h2 class="pos"></h2>
-                <h3 class="name"></h3>
-                <p class="desc"></p>
-                <a class="email" href=""></a>
-            </div>
-            <img src="" class="exec-img">
-        </div>
-    </template>
-    <script async id="api" src="https://apis.google.com/js/api.js"></script>
     <script>
         var hide;
         window.addEventListener("scroll", checkPos);
@@ -51,57 +28,98 @@
             hide = document.querySelectorAll(".hidden");
         }
     </script>
-    <script id="load">
-        function fillcontent(parent) {   
-            gapi.load("client", InitClient);
 
-            hide = document.querySelectorAll(".hidden");
-            checkPos();
-            
-            document.getElementById("api").remove();
-            document.getElementById("load").remove();
-        }
-        function InitClient() {
-            gapi.client.init({
-                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-            }).then(() => {
-                gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
-                    range: "Execs!A:G"
-                }).then((response) => {
-                    var results = response.result.values;
-                    var execs = document.getElementById("execs");
-                    for (var i = 0; i < results.length; i++) {
-                        var info = results[i];
+    <?php
+        $c = isset($_COOKIE['execs']) && !empty($_COOKIE["execs"]);
+        if (!$c) {
+            echo '
+                <template id="exec-info">
+                    <div class="exec-container hidden">
+                        <img src="" class="exec-img">
+                        <div class="exec-desc">
+                            <h2 class="pos"></h2>
+                            <h3 class="name"></h3>
+                            <p class="desc"></p>
+                            <a class="email" href=""></a>
+                        </div>
+                    </div>
+                </template>
+                <template id="exec-info-alt">
+                    <div class="exec-container alt hidden">
+                        <div class="exec-desc">
+                            <h2 class="pos"></h2>
+                            <h3 class="name"></h3>
+                            <p class="desc"></p>
+                            <a class="email" href=""></a>
+                        </div>
+                        <img src="" class="exec-img">
+                    </div>
+                </template>
+                <script async id="api" src="https://apis.google.com/js/api.js"></script>
+                <script id="load">
+                    function fillcontent(parent) {   
+                        gapi.load("client", InitClient);
 
-                        if ("content" in document.createElement("template")) {
-                            var t = i % 2 == 0 ? document.getElementById("exec-info") : document.getElementById("exec-info-alt");
-
-                            var imgSrc = info[6] == null ? "img/blank-user.jpg" : info[6];
-                            t.content.querySelector("img").src = imgSrc;
-                            t.content.querySelector(".pos").innerText = info[0];
-                            t.content.querySelector(".name").innerText = info[1] + ", " + info[3] + " " + info[4];
-                            t.content.querySelector(".desc").innerText = info[5] + "\nEmail: ";
-                            var link = t.content.querySelector("a");
-                            link.href = "mailto:" + info[2] + "@hawk.iit.edu";
-                            link.innerText = info[2] + "@hawk.iit.edu";
-
-                            execs.appendChild(document.importNode(t.content, true));
-                        }
+                        hide = document.querySelectorAll(".hidden");
+                        checkPos();
+                        
+                        document.getElementById("api").remove();
+                        document.getElementById("load").remove();
                     }
-                    
-                    document.getElementById("exec-info").remove();
-                    document.getElementById("exec-info-alt").remove();
+                    function InitClient() {
+                        gapi.client.init({
+                            apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                            discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+                        }).then(() => {
+                            gapi.client.sheets.spreadsheets.values.get({
+                                spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                                range: "Execs!A:G"
+                            }).then((response) => {
+                                var results = response.result.values;
+                                var d = new Date();
+                                d.setTime(d.getTime() + (5 * 60 * 1000));  // Cookie lasts for 5 min
+                                document.cookie = "execs=" + JSON.stringify(results) + ";expires=" + d.toUTCString();
+                                var execs = document.getElementById("execs");
+                                for (var i = 0; i < results.length; i++) {
+                                    var info = results[i];
 
-                    hide = document.querySelectorAll(".hidden");
-                    checkPos();
-                });
-            }, (error) => {
-                console.log("Could not load exec members.\n" + error);
-            });
+                                    if ("content" in document.createElement("template")) {
+                                        var t = i % 2 == 0 ? document.getElementById("exec-info") : document.getElementById("exec-info-alt");
+
+                                        var imgSrc = !info[6] ? "img/blank-user.jpg" : info[6];
+                                        t.content.querySelector("img").src = imgSrc;
+                                        t.content.querySelector(".pos").innerText = info[0];
+                                        t.content.querySelector(".name").innerText = info[1] + ", " + info[3] + " " + info[4];
+                                        t.content.querySelector(".desc").innerText = info[5] + "\nEmail: ";
+                                        var link = t.content.querySelector("a");
+                                        link.href = "mailto:" + info[2] + "@hawk.iit.edu";
+                                        link.innerText = info[2] + "@hawk.iit.edu";
+
+                                        execs.appendChild(document.importNode(t.content, true));
+                                    }
+                                }
+                                
+                                document.getElementById("exec-info").remove();
+                                document.getElementById("exec-info-alt").remove();
+
+                                hide = document.querySelectorAll(".hidden");
+                                checkPos();
+                            });
+                        }, (error) => {
+                            console.log("Could not load exec members.\n" + error);
+                        });
+                    }
+                </script>';
+        } else {
+            echo '
+                <script>
+                    function fillcontent(parent) {
+                        hide = document.querySelectorAll(".hidden");
+                        checkPos();
+                    }
+                </script>';
         }
-    </script>
+    ?>
 </head>
 <html>
     <body>
@@ -135,6 +153,38 @@
             </div>
             <div id="execs">
                 <h1 style="margin: 0; text-align: center; font-size: 2em">Meet the Exec Board</h1>
+                <?php
+                    if ($c) {
+                        $execs = json_decode($_COOKIE["execs"]);
+                        for ($i = 0; $i < count($execs); $i++) {
+                            $e = $execs[$i];
+                            echo '
+                                <div class="exec-container hidden' . ($i % 2 == 0 ? '' : ' alt') .'">';
+
+                            if ($i % 2 == 0) {
+                                echo '
+                                    <img src="' . (empty($e[6]) ? 'img/blank-user.jpg' : $e[6]) . '" class="exec-img">
+                                    <div class="exec-desc">
+                                        <h2 class="pos">' . $e[0] . '</h2>
+                                        <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
+                                        <p class="desc">' . $e[5] . '</p>
+                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu">' . $e[2] . '@hawk.iit.edu</a>
+                                    </div>';
+                            } else {
+                                echo '
+                                    <div class="exec-desc">
+                                        <h2 class="pos">' . $e[0] . '</h2>
+                                        <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
+                                        <p class="desc">' . $e[5] . '</p>
+                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu">' . $e[2] . '@hawk.iit.edu</a>
+                                    </div>
+                                    <img src="' . (empty($e[6]) ? 'img/blank-user.jpg' : $e[6]) . '" class="exec-img">';
+                            }
+
+                            echo '</div>';
+                        }
+                    }
+                ?>
             </div>
         </div>
         <?php include 'php/footer.php' ?>

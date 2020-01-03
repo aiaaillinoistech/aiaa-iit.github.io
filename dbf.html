@@ -13,37 +13,43 @@
 
     <link rel="stylesheet" type="text/css" href="css/dbf.css">
 
-    <script async id="api" src="https://apis.google.com/js/api.js"></script>
-    <script id="load">
-        function fillcontent(parent) {   
-            gapi.load("client", InitClient);
+    <?php
+        $c = isset($_COOKIE["execs"]) && !empty($_COOKIE["execs"]);
+        if (!$c) {
+            echo '
+                <script async id="api" src="https://apis.google.com/js/api.js"></script>
+                <script id="load">
+                    function fillcontent(parent) {   
+                        gapi.load("client", InitClient);
 
-            document.getElementById("api").remove();
-            document.getElementById("load").remove();
+                        document.getElementById("api").remove();
+                        document.getElementById("load").remove();
+                    }
+                    function InitClient() {
+                        gapi.client.init({
+                            apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                            discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+                        }).then(() => {
+                            gapi.client.sheets.spreadsheets.values.get({
+                                spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                                range: "Execs!A:C"
+                            }).then((response) => {
+                                response.result.values.forEach(el => {
+                                    if (el[0] == "DBF Project Manager") {
+                                        document.getElementById("cont").innerText += el[1] + " at ";
+                                        var link = document.getElementById("email");
+                                        link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=DBF");
+                                        link.innerText = el[2] + "@hawk.iit.edu";
+                                    }
+                                });
+                            });
+                        }, (error) => {
+                            console.log("Could not load email.\n" + error);
+                        });
+                    }
+                </script>';
         }
-        function InitClient() {
-            gapi.client.init({
-                apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
-            }).then(() => {
-                gapi.client.sheets.spreadsheets.values.get({
-                    spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
-                    range: "Execs!A:C"
-                }).then((response) => {
-                    response.result.values.forEach(el => {
-                        if (el[0] == "DBF Project Manager") {
-                            document.getElementById("cont").innerText += el[1] + " at ";
-                            var link = document.getElementById("email");
-                            link.setAttribute("href", "mailto:" + el[2] + "@hawk.iit.edu?subject=DBF");
-                            link.innerText = el[2] + "@hawk.iit.edu";
-                        }
-                    });
-                });
-            }, (error) => {
-                console.log("Could not load email.\n" + error);
-            });
-        }
-    </script>
+    ?>
 </head>
 <html>
     <body>
@@ -79,7 +85,19 @@
                 </div>
             </div>
             <div class="contact">
-                <p id="cont" style="display:inline">For more info or to join, email </p><a id="email" href="mailto:aiaa@iit.edu?subject=DBF">aiaa@iit.edu</a>
+                <p id="cont" style="display:inline">For more info or to join, email
+                <?php
+                    if ($c) {
+                        $execs = json_decode($_COOKIE["execs"]);
+                        foreach ($execs as $e) {
+                            if ($e[0] == "DBF Project Manager") {
+                                echo ' ' . $e[1] . ' at </p><a id="email" href="mailto:' . $e[2] . '?subject=DBF">' . $e[2] . '@hawk.iit.edu</a>';
+                            }
+                        }
+                    } else {
+                        echo '</p><a id="email" href="mailto:aiaa@iit.edu?subject=DBF">aiaa@iit.edu</a>';
+                    }
+                ?>
             </div>
             <h1 style="text-align: center; margin-bottom: 10px; font-family: 'Lato', sans-serif;">Subteams</h1>
             <p style="text-align: center; margin: 10px 10%;">
