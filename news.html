@@ -12,7 +12,7 @@
     <script async id="ics" crossorigin="anonymous" src="https://kit.fontawesome.com/b287813185.js"></script>
 
     <?php
-        $c = false;//isset($_COOKIE['news']) && !empty($_COOKIE['news']);
+        $c = isset($_COOKIE['news']) && !empty($_COOKIE['news']);
         if (!$c) {
             echo '
                 <template id="item">
