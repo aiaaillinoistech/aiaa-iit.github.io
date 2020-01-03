@@ -91,8 +91,8 @@
 }
 
 .fade {
-    -webkit-animation: fade 1.5s;
-    animation: fade 1.5s;
+    -webkit-animation: fade 1.5s ease-in-out;
+    animation: fade 1.5s ease-in-out;
 }
 
 .slide-caption h3 {
@@ -126,6 +126,22 @@
     border-radius: 5px;
 }
 
+.read {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: #141414;
+    border-radius: 5px;
+}
+
+.read:hover {
+    background-color: #646464;
+}
+
 @media only screen and (max-width: 1000px) {
     .slide {
         display: inline-block;
@@ -143,6 +159,13 @@
     }
     .slide-caption h3 {
         margin: 5px;
+    }
+    .read {
+        left: auto;
+        transform: none;
+        height: 70px;
+        width: 150px;
+        line-height: 50px;
     }
 }
 
