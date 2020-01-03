@@ -98,12 +98,14 @@
 .slide-caption h3 {
     margin: 5px;
     margin-bottom: 15px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .slide-caption p {
     margin: 5px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -159,6 +161,9 @@
     }
     .slide-caption h3 {
         margin: 5px;
+    }
+    .slide-caption *:not(.read) {
+        margin-right: 155px;
     }
     .read {
         left: auto;
