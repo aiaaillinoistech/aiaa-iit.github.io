@@ -6,9 +6,13 @@
 .slide {
     display: none;
     width: 100%;
-    max-width: 100%;
     position: relative;
     overflow: hidden;
+}
+
+.slide a {
+    display: table;
+    width: 100%;
 }
 
 .slide img {
@@ -116,7 +120,7 @@
 
 .quick-info {
     float: right;
-    margin: 20px 4% 10px 0;
+    margin: 20px 4% 10px 4%;
     background-color: beige;
     padding: 10px;
     border-radius: 5px;
@@ -126,7 +130,7 @@
     .slide {
         display: inline-block;
     }
-    .slide-img {
+    .slide img {
         border-radius: 5px 5px 0 0;
     }
     .slide-caption {

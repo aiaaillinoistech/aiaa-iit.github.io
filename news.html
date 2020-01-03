@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<head>
+    <title>News</title>
+    <link rel="icon" href="img/icon.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <?php $page = 'News'; ?>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/news.css">
+    <script async id="ics" crossorigin="anonymous" src="https://kit.fontawesome.com/b287813185.js"></script>
+
+    <?php
+        $c = false;//isset($_COOKIE['news']) && !empty($_COOKIE['news']);
+        if (!$c) {
+            echo '
+                <template id="item">
+                    <a class="ia" href="">
+                        <div class="item">
+                            <img src="">
+                            <div>
+                                <h2></h2>
+                                <p></p>
+                            </div>
+                        </div>
+                    </a>
+                </template>
+                <template id="article">
+                    <div class="article">
+                        <h1></h1>
+                        <p class="date"></p>
+                        <img src="">
+                        <p class="caption"></p>
+                    </div>
+                </template>
+                <script async id="api" src="https://apis.google.com/js/api.js"></script>
+                <script id="load">
+                    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    function fillcontent(parent) {
+                        gapi.load("client", initClient);
+
+                        document.getElementById("api").remove();
+                        document.getElementById("load").remove();
+                    }
+                    function initClient() {
+                        gapi.client.init({
+                            apiKey: "AIzaSyC_CBUPHbZjt2jO3Kg6I7cLIe4y4Mft9KE",
+                            discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"]
+                        }).then(() => {
+                            gapi.client.sheets.spreadsheets.values.get({
+                                spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
+                                range: "News!A:E"
+                            }).then((response) => {
+                                var result = response.result.values;
+
+                                var d = new Date();
+                                d.setTime(d.getTime() + (5 * 60 * 1000));  // Cookie lasts for 5 min
+                                document.cookie = "news=" + JSON.stringify(result) + ";expires=" + d.toUTCString();
+
+                                fillNews(result);
+                            });
+                        }, (error) => {
+                            var date = new Date();
+                            var d = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+                            buildArticle("Could not load news", "", d, "img/LoadFail.jpg");
+                        });
+                    }
+                    function fillNews(articles) {
+                        var id = getUrlParam("id");
+                        var head = document.createElement("h1");
+                        head.innerText = "More news";
+                        var more = document.getElementsByClassName("more")[0];
+                        more.appendChild(head);
+                        for (var i = 1; i <= articles.length; i++) {
+                            var item = articles[articles.length - i];
+                            if (id && id == item[0]) {
+                                buildArticle(item[2], item[3], item[1], item[4]);
+                            } else {
+                                var t = document.getElementById("item");
+                                t.content.querySelector("a").setAttribute("href", "news?id=" + item[0]);
+                                t.content.querySelector("img").setAttribute("src", item[4]);
+                                t.content.querySelector("h2").innerText = item[2];
+                                t.content.querySelector("p").innerText = item[3];
+                                more.appendChild(document.importNode(t.content, true));
+                                if (i < articles.length - 1) {
+                                    more.appendChild(document.createElement("hr"));
+                                }
+                            }
+                        }
+                        
+                        document.getElementById("item").remove();
+                        document.getElementById("article").remove();
+                    }
+                    function buildArticle(title, caption, date, imgSrc) {
+                        var t = document.getElementById("article");
+                        t.content.querySelector("h1").innerText = title;
+                        t.content.querySelector("img").src = imgSrc;
+                        t.content.querySelector(".caption").innerText = caption;
+
+                        var parts = date.split("/");
+                        t.content.querySelector(".date").innerText = months[parts[1] - 1] + " " + parts[0] + ", " + parts[2];
+
+                        document.getElementsByClassName("content")[0].insertBefore(document.importNode(t.content, true), document.getElementsByClassName("more")[0]);
+                    }
+                    function getUrlVars() {
+                        var vars = {};
+                        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                            vars[key] = value;
+                        });
+                        return vars;
+                    }
+                    function getUrlParam(parameter) {
+                        var urlparameter = "";
+                        if(window.location.href.indexOf(parameter) > -1) {
+                            urlparameter = getUrlVars()[parameter];
+                        }
+                    return urlparameter;
+            }
+                </script>';
+        }
+    ?>
+    <script async type="text/javascript" src="js/main.js"></script>
+</head>
+<html>
+    <body>
+        <div class="header">
+            <h1>News From AIAA</h1>
+        </div>
+        <?php include 'php/topnav.php' ?>
+        <div class="content">
+            <?php
+                if ($c) {
+                    $n = false;
+                    $months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        if (!empty($id)) {
+                            $n = true;
+                            foreach (json_decode($_COOKIE['news']) as $item) {
+                                if ($id == $item[0]) {
+                                    $parts = explode('/', $item[1]);
+                                    $date = $months[$parts[1] - 1] . ' ' . $parts[0] . ', ' . $parts[2];
+                                    echo '<div class="article">
+                                            <h1>' . $item[2] . '</h1>
+                                            <p class="date">' . $date . '</p>
+                                            <img src="' . $item[4] . '">
+                                            <p class="caption">' . $item[3] . '</p>
+                                        </div>';
+                                }
+                            }
+                        }
+                    }
+                }
+            ?>
+            <div class="more">
+                <?php
+                    if ($c) {
+                        if ($n) {
+                            echo '<h1>More news</h1>';
+                        }
+                        $news = json_decode($_COOKIE['news']);
+                        for ($i = 1; $i <= count($news); $i++) {
+                            $item = $news[count($news) - $i];
+                            if (!isset($_GET['id']) || $item[0] != $_GET['id']) {
+                                echo '<a class="ia" href="news?id=' . $item[0] . '">
+                                    <div class="item">
+                                        <img src="' . $item[4] . '">
+                                        <div>
+                                            <h2>' . $item[2] . '</h2>
+                                            <p>' . $item[3] . '</p>
+                                        </div>
+                                    </div>
+                                </a>';
+                                if ($i < count($news) - 1) {
+                                    echo '<hr>';
+                                }
+                            }
+                        }
+                    }
+                ?>
+            </div>
+        </div>
+        <?php include 'php/footer.php' ?>
+    </body>
+</html>

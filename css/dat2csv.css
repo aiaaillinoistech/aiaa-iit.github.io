@@ -13,6 +13,7 @@
 }
 
 .out {
+    position: relative;
     float: right;
 }
 
@@ -30,7 +31,7 @@
 
 .btn a {
     display: block;
-    margin: 75px 15px 50px 15px;
+    margin: 75px 25px 50px 25px;
     padding: 25px;
     color: white;
     background-color: #1965e0;
@@ -52,8 +53,8 @@
 
 .icons {
     position: absolute;
-    top: 154px;
-    right: 31px;
+    top: 22px;
+    right: 2px;
     font-size: 1.25em;
     background-color: rgb(240, 240, 240);
     color: rgb(83, 83, 83);
@@ -107,9 +108,5 @@
         margin: 0 25px;
         padding-right: 0;
         margin-right: 0;
-    }
-
-    .icons {
-        top: 672px;
     }
 }

@@ -2,12 +2,15 @@
     <ul>
     <?php
         $urls = array(
-            "Home" =>       array('title' => "Home",        'page' => "index.html",     'icon' => "fas fa-home"),
-            "About" =>      array('title' => "About",       'page' => "about.html",     'icon' => "fas fa-info"),
-            "DBF" =>        array('title' => "DBF",         'page' => "dbf.html",       'icon' => "fas fa-plane",
-                'sub' => array(array('title' => "DAT to CSV", 'page' => "dat2csv.html"))),
-            "Rocketry" =>   array('title' => "Rocketry",    'page' => "rocketry.html",  'icon' => "fas fa-rocket"),
-            "Contact" =>    array('title' => "Contact Us",  'page' => "contact.html",   'icon' => "fas fa-envelope")
+            "Home" =>       array('title' => "Home",        'page' => "index",      'icon' => "fas fa-home"),
+            "About" =>      array('title' => "About",       'page' => "about",      'icon' => "fas fa-info"),
+            "News" =>       array('title' => "News",        'page' => "news",       'icon' => "far fa-newspaper"),
+            "DBF" =>        array('title' => "DBF",         'page' => "dbf",        'icon' => "fas fa-plane",
+                'sub' =>    array(
+                                array('title' => "DAT to CSV", 'page' => "dat2csv")
+                            )),
+            "Rocketry" =>   array('title' => "Rocketry",    'page' => "rocketry",   'icon' => "fas fa-rocket"),
+            "Contact" =>    array('title' => "Contact Us",  'page' => "contact",    'icon' => "fas fa-envelope")
         );
 
         $set = FALSE;
