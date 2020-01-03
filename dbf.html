@@ -87,14 +87,18 @@
             <div class="contact">
                 <p id="cont" style="display:inline">For more info or to join, email
                 <?php
+                    $set = false;
                     if ($c) {
                         $execs = json_decode($_COOKIE["execs"]);
                         foreach ($execs as $e) {
                             if ($e[0] == "DBF Project Manager") {
+                                $set = true;
                                 echo ' ' . $e[1] . ' at </p><a id="email" href="mailto:' . $e[2] . '?subject=DBF">' . $e[2] . '@hawk.iit.edu</a>';
                             }
                         }
-                    } else {
+                    }
+
+                    if (!$set) {
                         echo '</p><a id="email" href="mailto:aiaa@iit.edu?subject=DBF">aiaa@iit.edu</a>';
                     }
                 ?>
