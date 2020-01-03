@@ -1,11 +1,6 @@
 var pos = 0;
 var head;
 
-function fillcontent(parent) {
-    GetNews();
-    setInterval(() => { moveslide(1); }, 10000);
-};
-
 var slideIndex = 1;
 
 function moveslide(n) {
@@ -35,5 +30,5 @@ function showSlides(n) {
     }
 
     slides[slideIndex - 1].style.display = "table";
-    dots[slideIndex - 1].className += " active";
+    dots[slideIndex - 1].classList.add("active");
 }

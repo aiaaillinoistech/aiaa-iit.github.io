@@ -16,6 +16,12 @@
         $c = isset($_COOKIE["news"]) && !empty($_COOKIE["news"]);
         if (!$c) {
             echo '
+                <script>
+                    function fillcontent(parent) {
+                        GetNews();
+                        setInterval(() => { moveslide(1); }, 10000);
+                    };
+                </script>
                 <script async id="api" src="https://apis.google.com/js/api.js"></script>
                 <template id="slide">
                     <div class="slide fade">
@@ -31,7 +37,6 @@
                 <template id="news-dot">
                     <span class="dot" onlick=""></span>
                 </template>
-                <script src="js/cookie.js"></script>
                 <script id="getnews">
                     function GetNews() {
                         gapi.load("client", initClient);
@@ -138,6 +143,14 @@
                         }
                     }
                 </script>';
+        } else {
+            echo '
+                <script>
+                    function fillcontent(parent) {
+                        showSlides(1);
+                        setInterval(() => { moveslide(1); }, 10000);
+                    };
+                </script>';
         }
     ?>
 
@@ -177,7 +190,6 @@
                                             </a>
                                         </div>';
                                 }
-                                echo '<script id="temp">showSlides(1);document.getElementById("temp").remove()</script>';
                             } else {
                                 echo '
                                     <div class="slide fade" style="display: table;">
@@ -196,6 +208,15 @@
                         </a>
                     </div>
                     <div class="news-dots">
+                        <?php
+                            if ($c) {
+                                $news = json_decode($_COOKIE["news"]);
+                                $num = count($news) > 5 ? 5 : count($news);
+                                for ($i = 1; $i <= $num; $i++) {
+                                    echo '<span class="dot' . ($i == 1 ? ' active' : '' ) .'" onclick="setslide(' . $i . ')"></span>';
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="quick-info col-3 col-s-12">
