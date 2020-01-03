@@ -91,6 +91,8 @@
     display: inline-block;
     vertical-align: middle;
     padding: 0 10px;
+    width: 75%;
+    max-width: 960px;
 }
 
 .alt.exec-container {

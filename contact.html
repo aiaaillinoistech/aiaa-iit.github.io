@@ -90,7 +90,7 @@
                                         t.content.querySelector("img").src = imgSrc;
                                         t.content.querySelector(".pos").innerText = info[0];
                                         t.content.querySelector(".name").innerText = info[1] + ", " + info[3] + " " + info[4];
-                                        t.content.querySelector(".desc").innerText = info[5] + "\nEmail: ";
+                                        t.content.querySelector(".desc").innerHTML = info[5] + "<br><b>Email: </b>";
                                         var link = t.content.querySelector("a");
                                         link.href = "mailto:" + info[2] + "@hawk.iit.edu";
                                         link.innerText = info[2] + "@hawk.iit.edu";
@@ -167,7 +167,7 @@
                                     <div class="exec-desc">
                                         <h2 class="pos">' . $e[0] . '</h2>
                                         <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
-                                        <p class="desc">' . $e[5] . '<br>Email: </p>
+                                        <p class="desc">' . $e[5] . '<br><b>Email: </b></p>
                                         <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu">' . $e[2] . '@hawk.iit.edu</a>
                                     </div>';
                             } else {
@@ -175,7 +175,7 @@
                                     <div class="exec-desc">
                                         <h2 class="pos">' . $e[0] . '</h2>
                                         <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
-                                        <p class="desc">' . $e[5] . '<br>Email: </p>
+                                        <p class="desc">' . $e[5] . '<br><b>Email: </b></p>
                                         <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu">' . $e[2] . '@hawk.iit.edu</a>
                                     </div>
                                     <img src="' . (empty($e[6]) ? 'img/blank-user.jpg' : $e[6]) . '" class="exec-img">';
