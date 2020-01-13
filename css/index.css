@@ -6,21 +6,27 @@
 .slide {
     display: none;
     width: 100%;
+    max-width: 100vw;
     position: relative;
     overflow: hidden;
 }
 
 .slide a {
-    display: table;
+    display: flex;
     width: 100%;
 }
 
-.slide img {
+.slide-img {
+    flex: 1;
+    width: 70%;
+    vertical-align: top;
+}
+
+.slide-img img {
     width: 100%;
     height: auto;
-    display: table-cell;
     border-radius: 5px 0 0 5px;
-    vertical-align: top;
+    display: block;
 }
 
 .prev, .next {
@@ -58,16 +64,27 @@
 }
 
 .slide-caption {
+    flex: 2;
     color: #f2f2f2;
     background-color: rgb(56, 56, 56);
-    font-size: 15px;
+    font-size: 12px;
     padding: 5px;
     position: relative;
+    word-break: break-word;
     width: 30%;
+    max-width: 30%;
     text-align: left;
     vertical-align: top;
-    display: table-cell;
+    line-height: 1em;
     border-radius: 0 5px 5px 0;
+}
+
+.slide-caption div {
+    position: absolute;
+    top: 29px;
+    bottom: 42px;
+    overflow: hidden;
+    line-height: 1.5em;
 }
 
 .news-dots {
@@ -97,14 +114,7 @@
 
 .slide-caption h3 {
     margin: 5px;
-    margin-bottom: 15px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.slide-caption p {
-    margin: 5px;
+    margin-bottom: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -133,7 +143,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    margin: 10px auto;
+    margin: 5px;
     padding: 10px;
     text-align: center;
     background-color: #141414;
@@ -148,19 +158,29 @@
     .slide {
         display: inline-block;
     }
-    .slide img {
+    .slide a {
+        display: block;
+    }
+    .slide-img {
+        display: block;
+        width: 100%;
+    }
+    .slide-img img {
         border-radius: 5px 5px 0 0;
     }
     .slide-caption {
-        display: inline-block;
+        display: block;
         bottom: 0;
-        width: 100%;
+        min-width: 100%;
         height: 80px;
         background-color: rgb(56, 56, 56);
         border-radius: 0 0 5px 5px;
     }
     .slide-caption h3 {
         margin: 5px;
+    }
+    .slide-caption div {
+        position: static;
     }
     .slide-caption *:not(.read) {
         margin-right: 155px;
