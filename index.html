@@ -25,13 +25,11 @@
                 <script async id="api" src="https://apis.google.com/js/api.js"></script>
                 <template id="slide">
                     <div class="slide fade">
-                        <a href="">
-                            <div class="slide-img">
-                                <img src="">
-                            </div>
+                        <a href="" style="display: table;">
+                            <img src="">
                             <div class="slide-caption">
                                 <h3></h3>
-                                <div></div>
+                                <p></p>
                                 <p class="read">Read full story >></p>
                             </div>
                         </a>
@@ -119,19 +117,31 @@
                                 src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
                             }
 
-                            t.content.querySelector("a").href = "news?id=" + link;
-                            t.content.querySelector("img").src = src;
-                            t.content.querySelector("h3").innerText = header;
-                            t.content.querySelector(".slide-caption div").innerHTML = caption;
+                            var slink = document.createElement("a");
+                            slink.setAttribute("href", link);
+                            slide.appendChild(slink);
 
-                            var c = document.importNode(t.content, true);
-                            show.insertBefore(c, document.getElementsByClassName("prev")[0]);
+                            var img = document.createElement("img");
+                            img.setAttribute("src", src);
+                            slink.appendChild(img);
 
-                            t = document.getElementById("news-dot");
-                            t.content.querySelector("span").setAttribute("onclick", "setslide(" + slideNum + ")");
+                            var capt = document.createElement("div");
+                            capt.classList.add("slide-caption");
+                            slink.appendChild(capt);
 
-                            c = document.importNode(t.content, true);
-                            document.getElementsByClassName("news-dots")[0].appendChild(c);
+                            var head = document.createElement("h3");
+                            head.appendChild(document.createTextNode(header));
+                            capt.appendChild(head);
+
+                            var par = document.createElement("p");
+                            par.appendChild(document.createTextNode(caption));
+                            capt.appendChild(par);
+
+                            var dots = document.getElementsByClassName("news-dots")[0];
+                            var dot = document.createElement("span");
+                            dot.classList.add("dot");
+                            dot.setAttribute("onclick", "setslide(" + slideNum + ")");
+                            dots.append(dot);
                         }
                     }
                 </script>';
@@ -148,16 +158,6 @@
 
     <script type="text/javascript" src="js/index.js"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script async type="text/javascript" src="js/clamp.js"></script>
-    <script>
-        window.addEventListener('load', () => {
-            var capts = document.getElementsByClassName("slide-caption");
-            var par;
-            for (var i = 0; i < capts.length; i++) {
-                $clamp(capts[i].querySelector('div'), {clamp: 'auto'});
-            }
-        });
-    </script>
 
     <?php include 'php/head-style.php' ?>
 </head>
@@ -170,7 +170,7 @@
             <div class="row notice-row">
                 <div class="notice col-12 col-s-12">
                     <i class="fa fa-info-circle"></i>
-                    <p>Our website is currently under renovations. Please excuse the lack of content and anything that is broken. Find something broken? Take a screenshot and send it to <a href="mailto:aiaa@iit.edu?subject=Website Error">aiaa@iit.edu</a>.</p>
+                    <p>Our website is currently under renovations. Please excuse the lack of content and anything that is broken.</p>
                 </div>
             </div>
             
@@ -185,13 +185,11 @@
                                     $item = $news[count($news) - $i];
                                     echo '
                                         <div class="slide fade">
-                                            <a href="news?id=' . $item[0] . '">
-                                                <div class="slide-img">
-                                                    <img src="' . $item[4] . '">
-                                                </div>
+                                            <a href="news?id=' . $item[0] . '" style="display: table;">
+                                                <img src="' . $item[4] . '">
                                                 <div class="slide-caption">
                                                     <h3>' . $item[2] . '</h3>
-                                                    <div>' . $item[3] . '</div>
+                                                    <p>' . $item[3] . '</p>
                                                     <p class="read">Read full story >></p>
                                                 </div>
                                             </a>
@@ -199,10 +197,8 @@
                                 }
                             } else {
                                 echo '
-                                    <div class="slide fade" style="display: block;">
-                                        <div class="slide-img">
-                                            <img src="img/LoadNews.jpg">
-                                        </div>
+                                    <div class="slide fade" style="display: table;">
+                                        <img src="img/LoadNews.jpg">
                                         <div class="slide-caption">
                                             <h3>Loading News</h3>
                                         </div>
