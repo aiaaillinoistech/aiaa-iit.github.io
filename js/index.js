@@ -32,3 +32,16 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "table";
     dots[slideIndex - 1].classList.add("active");
 }
+
+var a = null;
+window.onresize = function() {
+    if (a != null) {
+        clearTimeout(a);
+    }
+
+    a = setTimeout(function() {
+        newWidth = document.getElementById("twitter-widget-0").scrollWidth
+        document.getElementsByClassName("fb-page")[0].setAttribute("data-width", newWidth <= 500 ? newWidth : 500);
+        FB.XFBML.parse();
+    }, 1000);
+}

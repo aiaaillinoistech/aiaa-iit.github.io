@@ -57,7 +57,7 @@
                                 var result = response.result.values;
 
                                 var d = new Date();
-                                d.setTime(d.getTime() + (5 * 60 * 1000));  // Cookie lasts for 5 min
+                                d.setTime(d.getTime() + (12 * 3600 * 1000));  // Cookie lasts for 12 hours
                                 document.cookie = "news=" + JSON.stringify(result) + ";expires=" + d.toUTCString();
 
                                 fillSlides(result);
@@ -87,6 +87,7 @@
                             var t = document.getElementById("slide");
 
                             var src = imgSrc;
+                            console.log(imgSrc);
                             if (typeof src == "undefined" || src == "") {
                                 src = "https://drive.google.com/uc?export=view&id=15gPNpZLqL8pkH1RhA6NlXQ7-e_kZuVCe"; // Change this to a different picture
                             }
@@ -163,6 +164,8 @@
 <html>
     <body>
         <?php include 'php/header.php' ?>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=635629247337677&autoLogAppEvents=1" nonce="XrX5XuDx"></script>
         <div class="content">
             <div class="row notice-row">
                 <div class="notice col-12 col-s-12">
@@ -231,7 +234,18 @@
                     <p>Thursday 3:00 pm</p>
                 </div>
             </div>
-            <a class="twitter-timeline" data-height="600" data-width="500" href="https://twitter.com/AiaaTech?ref_src=twsrc%5Etfw">Tweets by AiaaTech</a>
+            <div class="row social-media">
+                <div class="col-4 col-s-12">
+                    <div class="fb-page" data-href="https://www.facebook.com/101046947957734" data-tabs="timeline" data-width="" data-height="600" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/101046947957734" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/101046947957734">AIAA Illinois Tech Facebook</a></blockquote></div>
+                </div>
+                <div class="col-4 col-s-12">
+                    <a class="twitter-timeline" data-height="600" data-width="500" href="https://twitter.com/AiaaTech?ref_src=twsrc%5Etfw">Tweets by AIAA Illinois Tech</a>
+                </div>
+                <div class="col-4 col-s-12" style="height:600px;overflow:scroll;">
+                    AIAA Illinois Tech Instagram
+                    <div class='embedsocial-instagram' data-ref="9b1a15d42e7fe66dc465040cab02b02aaa40a977"></div><script>(function(d, s, id){var js; if (d.getElementById(id)) {return;} js = d.createElement(s); js.id = id; js.src = "https://embedsocial.com/embedscript/in.js"; d.getElementsByTagName("head")[0].appendChild(js);}(document, "script", "EmbedSocialInstagramScript"));</script>
+                </div>
+            </div>
         </div>
         <?php include 'php/footer.php' ?>
     </body>

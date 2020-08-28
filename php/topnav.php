@@ -20,14 +20,14 @@
                 $set = TRUE;
             }
 
-            echo "<li><a" . ($page === $item['title'] ? " class=\"active\"" : "" ) . " href=\"$item[page]\"><i class=\"$item[icon]\"></i>$item[title]</a>";
+            echo "<li " . (count($item) === 4 ? "class=\"dropdown\"" : "") . "><a" . ($page === $item['title'] ? " class=\"active\"" : "" ) . " href=\"$item[page]\"><i class=\"$item[icon]\"></i>$item[title]</a>";
         
             if (count($item) === 4) {
-                echo "<div class=\"dropdown\"><ul>";
+                echo "<div class=\"dropdown-content\">";
                 foreach ($item['sub'] as $sub) {
-                    echo "<li><a" . ($page === $sub['title'] ? " class=\"active\"" : "" ) . " href=\"$sub[page]\">$sub[title]</a></li>";
+                    echo "<a" . ($page === $sub['title'] ? " class=\"active\"" : "" ) . " href=\"$sub[page]\">$sub[title]</a>";
                 }
-                echo "</ul></div>";
+                echo "</div>";
             }
             
             echo "</li>";
