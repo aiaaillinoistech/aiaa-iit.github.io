@@ -17,26 +17,27 @@
         if (!$c) {
             echo '
                 <script>
+                    var autoSlide;
                     function fillcontent(parent) {
                         GetNews();
-                        setInterval(() => { moveslide(1); }, 10000);
+                        //autoSlide = setInterval(() => { moveslide(1); }, 10000);
                     };
                 </script>
                 <script async id="api" src="https://apis.google.com/js/api.js"></script>
                 <template id="slide">
                     <div class="slide fade">
-                        <a href="" style="display: table;">
-                            <img src="">
+                        <a href="">
+                            <div class="slide-img"></div>
                             <div class="slide-caption">
                                 <h3></h3>
-                                <p></p>
+                                <p class="caption"></p>
                                 <p class="read">Read full story >></p>
                             </div>
                         </a>
                     </div>
                 </template>
                 <template id="news-dot">
-                    <span class="dot" onlick=""></span>
+                    <span class="dot"></span>
                 </template>
                 <script id="getnews">
                     function GetNews() {
@@ -93,7 +94,8 @@
                             }
 
                             t.content.querySelector("a").href = "news?id=" + link;
-                            t.content.querySelector("img").src = src;
+                            //t.content.querySelector("img").src = src;
+                            t.content.querySelector(".slide-img").style = "background-image: url(\"" + src + "\");";
                             t.content.querySelector("h3").innerText = header;
                             t.content.querySelector("p").innerText = caption;
 
@@ -122,6 +124,7 @@
                             slide.appendChild(slink);
 
                             var img = document.createElement("img");
+                            img.classList.add("slide-img");
                             img.setAttribute("src", src);
                             slink.appendChild(img);
 
@@ -134,6 +137,7 @@
                             capt.appendChild(head);
 
                             var par = document.createElement("p");
+                            par.classList.add("caption");
                             par.appendChild(document.createTextNode(caption));
                             capt.appendChild(par);
 
@@ -148,9 +152,10 @@
         } else {
             echo '
                 <script>
+                    var autoSlide;
                     function fillcontent(parent) {
                         showSlides(1);
-                        setInterval(() => { moveslide(1); }, 10000);
+                        autoSlide = setInterval(() => { moveslide(1); }, 10000);
                     };
                 </script>';
         }
@@ -185,11 +190,11 @@
                                     $item = $news[count($news) - $i];
                                     echo '
                                         <div class="slide fade">
-                                            <a href="news?id=' . $item[0] . '" style="display: table;">
-                                                <img src="' . $item[4] . '">
+                                            <a href="news?id=' . $item[0] . '">
+                                                <div class="slide-img" style="background-image: url(' . $item[4] . ');">
                                                 <div class="slide-caption">
                                                     <h3>' . $item[2] . '</h3>
-                                                    <p>' . $item[3] . '</p>
+                                                    <p class="caption">' . $item[3] . '</p>
                                                     <p class="read">Read full story >></p>
                                                 </div>
                                             </a>
@@ -197,11 +202,13 @@
                                 }
                             } else {
                                 echo '
-                                    <div class="slide fade" style="display: table;">
-                                        <img src="img/LoadNews.jpg">
-                                        <div class="slide-caption">
-                                            <h3>Loading News</h3>
-                                        </div>
+                                    <div class="slide fade" style="display: flex;">
+                                        <a>
+                                            <div class="slide-img" style="background-image: url(img/LoadNews.jpg); background-size: cover;"></div>
+                                            <div class="slide-caption">
+                                                <h3>Loading News</h3>
+                                            </div>
+                                        </a>
                                     </div>';
                             }
                         ?>

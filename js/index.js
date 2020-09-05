@@ -9,6 +9,8 @@ function moveslide(n) {
 
 function setslide(n) {
     showSlides(slideIndex = n);
+    clearInterval(autoSlide);
+    autoSlide = setInterval(() => { moveslide(1); }, 10000);
 }
 
 function showSlides(n) {
