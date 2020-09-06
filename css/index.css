@@ -8,6 +8,7 @@
     width: 100%;
     max-width: 100vw;
     height: 50vh;
+    min-height: 400px;
     position: relative;
     overflow: hidden;
 }
@@ -97,6 +98,7 @@
 }
 
 .news-dots {
+    position: relative;
     text-align: center;
     margin: 0 2.5% 15px 2.5%;
 }
@@ -114,6 +116,36 @@
 
 .active, .dot:hover {
     background-color: #717171;
+}
+
+.toggle-auto {
+    position: absolute;
+    top: -7.5px;
+    right: 0;
+    width: 130px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.auto-on {
+    background-color: rgb(10, 60, 170);
+    color: white;
+}
+
+.auto-on:hover {
+    background-color: rgb(60, 110, 200);
+    cursor: pointer;
+}
+
+.auto-off {
+    background-color: rgb(200, 200, 200);
+    color: black;
+}
+
+.auto-off:hover {
+    background-color: rgb(130, 130, 130);
+    cursor: pointer;
 }
 
 .fade {
@@ -140,10 +172,11 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: 25px;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, transparent 80%, rgb(56, 56, 56) 95%);
+    background: linear-gradient(to bottom, transparent 80%, rgb(56, 56, 56) 88%, rgb(56, 56, 56));
+    border-radius: 0px 5px 5px 0px;
 }
 
 @-webkit-keyframes fade {
@@ -195,7 +228,6 @@
     }
     .slide-caption {
         display: block;
-        bottom: 0;
         min-width: 100%;
         height: 80px;
         background-color: rgb(56, 56, 56);
@@ -208,7 +240,8 @@
         margin-right: 155px;
     }
     .caption:after {
-        bottom: 0;
+        background: linear-gradient(to bottom, transparent 50%, rgb(56, 56, 56) 98%, rgb(56, 56, 56));
+        border-radius: 0 0 5px 5px;
     }
     .read {
         left: auto;
@@ -226,6 +259,9 @@
         border-radius: 0;
     }
     .slide-caption {
+        border-radius: 0;
+    }
+    .slide-caption:after {
         border-radius: 0;
     }
     .quick-info {

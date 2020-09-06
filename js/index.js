@@ -9,8 +9,10 @@ function moveslide(n) {
 
 function setslide(n) {
     showSlides(slideIndex = n);
-    clearInterval(autoSlide);
-    autoSlide = setInterval(() => { moveslide(1); }, 10000);
+    if (autoSlide != -1) {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(() => { moveslide(1); }, 10000);
+    }
 }
 
 function showSlides(n) {
@@ -46,4 +48,20 @@ window.onresize = function() {
         document.getElementsByClassName("fb-page")[0].setAttribute("data-width", newWidth <= 500 ? newWidth : 500);
         FB.XFBML.parse();
     }, 1000);
+}
+
+function toggleAuto() {
+    var btn = document.getElementsByClassName("toggle-auto")[0];
+    if (autoSlide == -1) {
+        autoSlide = setInterval(() => { moveslide(1); }, 10000);
+        btn.innerHTML = "Auto-scroll on";
+        btn.classList.remove("auto-off");
+        btn.classList.add("auto-on");
+    } else {
+        clearInterval(autoSlide);
+        autoSlide = -1;
+        btn.innerHTML = "Auto-scroll off";
+        btn.classList.remove("auto-on");
+        btn.classList.add("auto-off");
+    }
 }
