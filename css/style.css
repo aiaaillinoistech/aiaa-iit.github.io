@@ -141,6 +141,7 @@ a:hover {
         position: relative;
         background-color: #164fc9;
         margin-bottom: 43.2px;
+        z-index: 1000;
     }
 
     .topnav ul {
