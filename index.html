@@ -158,8 +158,7 @@
                 <script>
                     var autoScroll;
                     function fillcontent(parent) {
-                        showSlides(1);
-                        ' . ($autoScroll == "on" ? 'autoScroll = setInterval(() => { moveslide(1); }, 10000);' : 'autoScroll = -1;') . '
+                        showSlides(1);' . ($autoScroll == "on" ? "autoScroll = setInterval(() => { moveslide(1); }, 10000);" : "autoScroll = -1;") . '
                     };
                 </script>';
         }
