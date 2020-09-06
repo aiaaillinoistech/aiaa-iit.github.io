@@ -20,7 +20,7 @@
                     var autoSlide;
                     function fillcontent(parent) {
                         GetNews();
-                        //autoSlide = setInterval(() => { moveslide(1); }, 10000);
+                        autoSlide = setInterval(() => { moveslide(1); }, 10000);
                     };
                 </script>
                 <script async id="api" src="https://apis.google.com/js/api.js"></script>
@@ -55,13 +55,14 @@
                                 spreadsheetId: "11LXQyGMqWwMq_cp46vKt9a-t4OgrXjTXv6Xf64oVMTY",
                                 range: "News!A:E"
                             }).then((response) => {
-                                var result = response.result.values;
+                                /*var result = response.result.values;
 
                                 var d = new Date();
                                 d.setTime(d.getTime() + (12 * 3600 * 1000));  // Cookie lasts for 12 hours
                                 document.cookie = "news=" + JSON.stringify(result) + ";expires=" + d.toUTCString();
 
-                                fillSlides(result);
+                                fillSlides(result);*/
+                                fillSlides(response.result.values);
                             });
                         }, (error) => {
                             buildSlide("", "Could not load news", "", "img/LoadFail.jpg", 1);
