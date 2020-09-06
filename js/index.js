@@ -9,10 +9,7 @@ function moveslide(n) {
 
 function setslide(n) {
     showSlides(slideIndex = n);
-    if (autoSlide != -1) {
-        clearInterval(autoSlide);
-        autoSlide = setInterval(() => { moveslide(1); }, 10000);
-    }
+    resetTimer();
 }
 
 function showSlides(n) {
@@ -52,16 +49,27 @@ window.onresize = function() {
 
 function toggleAuto() {
     var btn = document.getElementsByClassName("toggle-auto")[0];
-    if (autoSlide == -1) {
-        autoSlide = setInterval(() => { moveslide(1); }, 10000);
+    var d = new Date();
+    d.setFullYear(2100);
+    if (autoScroll == -1) {
+        autoScroll = setInterval(() => { moveslide(1); }, 10000);
         btn.innerHTML = "Auto-scroll on";
         btn.classList.remove("auto-off");
         btn.classList.add("auto-on");
+        document.cookie = "auto-scroll=on;expires=" + d.toUTCString(); + ";samesite=strict";
     } else {
-        clearInterval(autoSlide);
-        autoSlide = -1;
+        clearInterval(autoScroll);
+        autoScroll = -1;
         btn.innerHTML = "Auto-scroll off";
         btn.classList.remove("auto-on");
         btn.classList.add("auto-off");
+        document.cookie = "auto-scroll=off;expires=" + d.toUTCString(); + ";samesite=strict";
+    }
+}
+
+function resetTimer() {
+    if (autoScroll != -1) {
+        clearInterval(autoScroll);
+        autoScroll = setInterval(() => { moveslide(1); }, 10000);
     }
 }

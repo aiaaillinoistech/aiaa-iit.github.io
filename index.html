@@ -13,14 +13,17 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <?php
-        $c = isset($_COOKIE["news"]) && !empty($_COOKIE["news"]);
+        $c = isset($_COOKIE["news"]) && !empty($_COOKIE["news"]);$autoScroll = "";
+        if(isset($_COOKIE["auto-scroll"]) && !empty($_COOKIE["auto-scroll"])) {
+            $autoScroll = $_COOKIE["auto-scroll"];
+        }
         if (!$c) {
             echo '
                 <script>
-                    var autoSlide;
+                    var autoScroll;
                     function fillcontent(parent) {
                         GetNews();
-                        autoSlide = setInterval(() => { moveslide(1); }, 10000);
+                        ' . ($autoScroll == "on" ? 'autoScroll = setInterval(() => { moveslide(1); }, 10000);' : 'autoScroll = -1;') . '
                     };
                 </script>
                 <script async id="api" src="https://apis.google.com/js/api.js"></script>
@@ -153,10 +156,10 @@
         } else {
             echo '
                 <script>
-                    var autoSlide;
+                    var autoScroll;
                     function fillcontent(parent) {
                         showSlides(1);
-                        autoSlide = setInterval(() => { moveslide(1); }, 10000);
+                        ' . ($autoScroll == "on" ? 'autoScroll = setInterval(() => { moveslide(1); }, 10000);' : 'autoScroll = -1;') . '
                     };
                 </script>';
         }
@@ -213,10 +216,10 @@
                                     </div>';
                             }
                         ?>
-                        <a class="prev" onclick="moveslide(-1)">
+                        <a class="prev" onclick="moveslide(-1); resetTimer();">
                             <i class="fas fa-angle-left" style="vertical-align: middle; font-size: 1.25em;"></i>
                         </a>
-                        <a class="next" onclick="moveslide(1)">
+                        <a class="next" onclick="moveslide(1); resetTimer();">
                             <i class="fas fa-angle-right" style="vertical-align: middle; font-size: 1.25em;"></i>
                         </a>
                     </div>
@@ -229,10 +232,19 @@
                                     echo '<span class="dot' . ($i == 1 ? ' active' : '' ) .'" onclick="setslide(' . $i . ')"></span>';
                                 }
                             }
+                            if(isset($_COOKIE["auto-scroll"]) && !empty($_COOKIE["auto-scroll"])) {
+                                $autoScroll = $_COOKIE["auto-scroll"];
+                                echo '
+                                    <div class="toggle-auto auto-' . $autoScroll . '" onclick="toggleAuto();">
+                                        Auto-scroll ' . $autoScroll . '
+                                    </div>';
+                            } else {
+                                echo '
+                                    <div class="toggle-auto auto-on" onclick="toggleAuto();">
+                                        Auto-scroll on
+                                    </div>';
+                            }
                         ?>
-                        <div class="toggle-auto auto-on" onclick="toggleAuto();">
-                            Auto-scroll on
-                        </div>
                     </div>
                 </div>
                 <div class="quick-info col-3 col-s-12">

@@ -78,7 +78,7 @@
                                 var results = response.result.values;
                                 var d = new Date();
                                 d.setTime(d.getTime() + (12 * 3600 * 1000));  // Cookie lasts for 12 hours
-                                document.cookie = "execs=" + JSON.stringify(results) + ";expires=" + d.toUTCString();
+                                document.cookie = "execs=" + JSON.stringify(results) + ";expires=" + d.toUTCString() + ";samesite=strict";
                                 var execs = document.getElementById("execs");
                                 for (var i = 0; i < results.length; i++) {
                                     var info = results[i];
