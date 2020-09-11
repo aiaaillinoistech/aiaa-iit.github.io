@@ -90,7 +90,7 @@
                                         t.content.querySelector(".name").innerText = info[1] + ", " + info[3] + " " + info[4];
                                         t.content.querySelector(".desc").innerHTML = info[5] + "<br><b>Email: </b>";
                                         var link = t.content.querySelector("a");
-                                        link.href = "mailto:" + info[2] + "@hawk.iit.edu?subject=AIAA+Information";
+                                        link.href = "mailto:" + info[2] + "@hawk.iit.edu?subject=AIAA%20Information";
                                         link.innerText = info[2] + "@hawk.iit.edu";
 
                                         execs.appendChild(document.importNode(t.content, true));
@@ -166,7 +166,7 @@
                                         <h2 class="pos">' . $e[0] . '</h2>
                                         <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
                                         <p class="desc">' . $e[5] . '<br><b>Email: </b></p>
-                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu?subject=AIAA+Information">' . $e[2] . '@hawk.iit.edu</a>
+                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu?subject=AIAA%20Information">' . $e[2] . '@hawk.iit.edu</a>
                                     </div>';
                             } else {
                                 echo '
@@ -174,7 +174,7 @@
                                         <h2 class="pos">' . $e[0] . '</h2>
                                         <h3 class="name">' . $e[1] . ', ' . $e[3] . ' ' . $e[4] . '</h3>
                                         <p class="desc">' . $e[5] . '<br><b>Email: </b></p>
-                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu?subject=AIAA+Information">' . $e[2] . '@hawk.iit.edu</a>
+                                        <a class="email" href="mailto:' . $e[2] . '@hawk.iit.edu?subject=AIAA%20Information">' . $e[2] . '@hawk.iit.edu</a>
                                     </div>
                                     <img src="' . (empty($e[6]) ? 'img/blank-user.jpg' : $e[6]) . '" class="exec-img">';
                             }
