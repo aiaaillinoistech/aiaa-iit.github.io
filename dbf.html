@@ -148,7 +148,7 @@
                         $ipData = json_decode($json, true);
 
                         $tz = 'America/Chicago';
-                        if ($ipData['timezone']) {
+                        if ($ipData['status'] == 'success') {
                             $tz = $ipData['timezone'];
                         }
 
