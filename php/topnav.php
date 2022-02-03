@@ -9,7 +9,6 @@
                 'sub' =>    array(
                                 array('title' => "DAT to CSV", 'page' => "dat2csv")
                             )),
-            "Rocketry" =>   array('title' => "Rocketry",    'page' => "rocketry",   'icon' => "fas fa-rocket"),
             "Contact" =>    array('title' => "Contact Us",  'page' => "contact",    'icon' => "fas fa-envelope")
         );
 
